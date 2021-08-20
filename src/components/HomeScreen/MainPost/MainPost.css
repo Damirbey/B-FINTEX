@@ -1,0 +1,9 @@
+/****************************Styling Layout****************************/
+.main-post{
+    grid-area: main-post;
+    padding:10px;
+}
+.mainPostImage{
+    height:auto;
+    width:100%;
+}

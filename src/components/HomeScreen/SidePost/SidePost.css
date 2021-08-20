@@ -1,0 +1,12 @@
+/************************** Side Post ********************************/
+.side-post{
+    grid-area:side-post;
+}
+.box{
+    padding:10px 0;
+    border-bottom: 2px solid #cccccc;
+}
+.box > h2{
+    padding-top:10px;
+    font-weight: bold;
+}

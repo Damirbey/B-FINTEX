@@ -1,0 +1,61 @@
+/************************** Bottom Post ********************************/
+.bottom-post{
+    grid-area:bottom-post;
+    height: 100vh;
+}
+/************************** Styling Post ******************************/
+.post{
+    padding:20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "postHeader postContent postImage";
+    border-top: 2px solid #cccccc;
+    grid-gap:64px;
+    transition: all 0.1s;
+    cursor: pointer;
+    align-items: center;
+    justify-items: center;
+}
+.post:hover{
+    transform: scale(1.05);
+}
+.postHeader{
+    grid-area:postHeader;
+}
+.postContent{
+   grid-area: postContent;
+}
+.postImage{
+    grid-area:postImage;
+}
+.postImage>img{
+    width: 430px;
+    height: 230px;
+}
+.date{
+    font-style: italic;
+    font-family: "Times New Roman", Georgia, serif;
+    color:#888888;
+    margin-top: -15px;
+}
+@media only screen and (max-width:1000px){
+    .post{
+       display:grid;
+       grid-template-columns: 1fr 1fr ;
+       grid-template-areas: 
+       "postHeader postImage";
+       align-items: center;
+       justify-items: center;
+    }
+    .postContent{
+        display: none;
+    }
+    .postImage>img{
+        width:100%;
+        height: auto;
+    }
+    .postHeader > h1{
+        font-size: 1.5rem;
+    }
+}

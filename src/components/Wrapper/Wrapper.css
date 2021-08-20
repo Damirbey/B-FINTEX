@@ -1,0 +1,9 @@
+/****************************Styling Wrapper****************************/
+.wrapper{
+    max-width: 1500px;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding:20px;
+}
