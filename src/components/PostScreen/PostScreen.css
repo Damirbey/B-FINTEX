@@ -1,0 +1,19 @@
+/************************** Post Page ********************************/
+.postContainer{
+    display: grid;
+    grid-template-columns: 1fr;
+    box-shadow: 2px 2px 2px #888888;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding:20px;
+}
+.postContainer > img{
+    width:100%;
+    height:auto;
+}
+.postFullContent {
+    line-height: 55px;
+    font-size: 1.2rem;
+    text-align: justify;
+    padding:10px;
+}

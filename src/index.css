@@ -9,7 +9,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-h1{
+h1,h2{
   font-weight: bold;
 }
 h1, h2, p,.mainPostImage{
@@ -20,4 +20,10 @@ h1:hover, h2:hover{
 }
 .header{
   grid-area:header;
+}
+.link {
+  color:#000000 !important;
+}
+.link:hover {
+   color: #00F
 }

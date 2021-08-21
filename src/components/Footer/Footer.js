@@ -5,7 +5,7 @@ function Footer()
 {
     return(
         <footer>
-            All Rights Reserved
+           &copy; All Rights Reserved
         </footer> 
     )
 }

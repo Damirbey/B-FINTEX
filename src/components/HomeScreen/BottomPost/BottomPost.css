@@ -1,7 +1,7 @@
 /************************** Bottom Post ********************************/
 .bottom-post{
     grid-area:bottom-post;
-    height: 100vh;
+    height: auto;
 }
 /************************** Styling Post ******************************/
 .post{
@@ -25,11 +25,15 @@
 }
 .postContent{
    grid-area: postContent;
+   display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .postImage{
     grid-area:postImage;
 }
-.postImage>img{
+.postImage>.link>img{
     width: 430px;
     height: 230px;
 }
@@ -51,7 +55,7 @@
     .postContent{
         display: none;
     }
-    .postImage>img{
+    .postImage>.link>img{
         width:100%;
         height: auto;
     }

@@ -1,49 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './BottomPost.css';
 
-function BottomPost()
+function BottomPost({posts})
 {
     return(
         <div className="bottom-post">
-                    <div className="post">
+            {
+                posts.map((post,index)=>{
+                    return (
+                    <div className="post" key={index}>
                         <div className="postHeader">
-                            <h1>Salesforce announces first integrations with Slack after closing $28B sale</h1>
-                            <p>Taylor Hatmaker</p>
-                            <p className="date">August 18, 2021</p>
+                            <Link to={`/posts/${post.id}`} className="link">
+                                <h1>{post.title}</h1>
+                            </Link>
+                            <p>{post.author}</p>
+                            <p className="date">{post.publishedDate}</p>
                         </div>
                         <div className="postContent">
-                            <p>Effectively leveraging email analytics and data to inform future emails and multichannel campaigns requires marketers to start preparing now.</p>
-                        </div>
-                        <div className=" ">
-                            <img src="images/news/image1.jpg" alt="post image"/>
-                        </div> 
-                    </div>  
-                    <div className="post">
-                        <div className="postHeader">
-                            <h1>Salesforce announces first integrations with Slack after closing $28B sale</h1>
-                            <p>Taylor Hatmaker</p>
-                            <p className="date">August 18, 2021</p>
-                        </div>
-                        <div className="postContent">
-                            <p>Effectively leveraging email analytics and data to inform future emails and multichannel campaigns requires marketers to start preparing now.</p>
+                            <Link to={`/posts/${post.id}`} className="link">
+                                <p>{post.content}</p>
+                            </Link>
                         </div>
                         <div className="postImage">
-                            <img src="images/news/image1.jpg" alt="post image"/>
+                            <Link to={`/posts/${post.id}`} className="link">
+                                <img src = {process.env.PUBLIC_URL + post.image} alt="post image"/>
+                            </Link>
                         </div> 
-                    </div> 
-                    <div className="post">
-                        <div className="postHeader">
-                            <h1>Salesforce announces first integrations with Slack after closing $28B sale</h1>
-                            <p>Taylor Hatmaker</p>
-                            <p className="date">August 18, 2021</p>
-                        </div>
-                        <div className="postContent">
-                            <p>Effectively leveraging email analytics and data to inform future emails and multichannel campaigns requires marketers to start preparing now.</p>
-                        </div>
-                        <div className="postImage">
-                            <img src="images/news/image1.jpg" alt="post image"/>
-                        </div> 
-                    </div>   
+                    </div>
+                    )
+                })
+            }
+                     
         </div>
     )
 }

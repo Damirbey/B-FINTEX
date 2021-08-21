@@ -1,25 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './SidePost.css';
 
-function SidePost(){
+function SidePost({posts}){
     return(
         <div className="side-post">
-            <div className="box">
-                <h2>Salesforce announces first integrations with Slack after closing $28B sale</h2>
-                <p>Taylor Hatmaker</p>
-            </div>        
-            <div className="box">
-                <h2>Salesforce announces first integrations with Slack after closing $28B sale</h2>
-                <p>Taylor Hatmaker</p>
-            </div>    
-            <div classNameName="box">
-                <h2>Salesforce announces first integrations with Slack after closing $28B sale</h2>
-                <p>Taylor Hatmaker</p>
-            </div>
-            <div className="box">
-                <h2>Salesforce announces first integrations with Slack after closing $28B sale</h2>
-                <p>Taylor Hatmaker</p>
-            </div>
+            {
+                posts.map((post,index)=>{
+                    return (
+                    <div className="box" key={index}>
+                        <Link to={`/posts/${post.id}`} className="link">
+                            <h2>{post.title}</h2>
+                        </Link>
+                        <p>{post.author}</p>
+                    </div> )
+                })
+            }
         </div>
     )
 }
