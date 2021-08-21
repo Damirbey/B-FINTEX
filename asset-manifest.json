@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/B-FINTEX/static/css/main.be549eda.chunk.css",
-    "main.js": "/B-FINTEX/static/js/main.c0ab0d8d.chunk.js",
-    "main.js.map": "/B-FINTEX/static/js/main.c0ab0d8d.chunk.js.map",
+    "main.css": "/B-FINTEX/static/css/main.51c5c5ec.chunk.css",
+    "main.js": "/B-FINTEX/static/js/main.3ebfed8a.chunk.js",
+    "main.js.map": "/B-FINTEX/static/js/main.3ebfed8a.chunk.js.map",
     "runtime-main.js": "/B-FINTEX/static/js/runtime-main.dbada3b8.js",
     "runtime-main.js.map": "/B-FINTEX/static/js/runtime-main.dbada3b8.js.map",
     "static/js/2.c7e66daf.chunk.js": "/B-FINTEX/static/js/2.c7e66daf.chunk.js",
@@ -10,13 +10,14 @@
     "static/js/3.161f24ec.chunk.js": "/B-FINTEX/static/js/3.161f24ec.chunk.js",
     "static/js/3.161f24ec.chunk.js.map": "/B-FINTEX/static/js/3.161f24ec.chunk.js.map",
     "index.html": "/B-FINTEX/index.html",
-    "static/css/main.be549eda.chunk.css.map": "/B-FINTEX/static/css/main.be549eda.chunk.css.map",
-    "static/js/2.c7e66daf.chunk.js.LICENSE.txt": "/B-FINTEX/static/js/2.c7e66daf.chunk.js.LICENSE.txt"
+    "static/css/main.51c5c5ec.chunk.css.map": "/B-FINTEX/static/css/main.51c5c5ec.chunk.css.map",
+    "static/js/2.c7e66daf.chunk.js.LICENSE.txt": "/B-FINTEX/static/js/2.c7e66daf.chunk.js.LICENSE.txt",
+    "static/media/logo.c7caa4f8.png": "/B-FINTEX/static/media/logo.c7caa4f8.png"
   },
   "entrypoints": [
     "static/js/runtime-main.dbada3b8.js",
     "static/js/2.c7e66daf.chunk.js",
-    "static/css/main.be549eda.chunk.css",
-    "static/js/main.c0ab0d8d.chunk.js"
+    "static/css/main.51c5c5ec.chunk.css",
+    "static/js/main.3ebfed8a.chunk.js"
   ]
 }
