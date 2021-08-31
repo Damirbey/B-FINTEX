@@ -16,7 +16,7 @@ class App extends Component{
         <BrowserRouter>
           <Navigation/>
           <Wrapper>
-              <Route path="/" component={HomeScreen} exact/>
+              <Route path="/B-FINTEX" component={HomeScreen} exact/>
               <Route path="/About" component={AboutScreen}/>
               <Route path="/posts/:id" component={PostScreen}/>
               <Route path="/Newsletters" component={NewsLettersScreen}/>

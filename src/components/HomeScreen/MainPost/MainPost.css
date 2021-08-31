@@ -7,3 +7,9 @@
     height:auto;
     width:100%;
 }
+
+@media only screen and (max-width:1000px){
+    .main-post>.link> h1{
+        font-size: 1.7rem;
+    }
+}

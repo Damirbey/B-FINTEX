@@ -10,3 +10,9 @@
     padding-top:10px;
     font-weight: bold;
 }
+
+@media only screen and (max-width:1000px){
+    .box>.link> h2{
+        font-size: 1.7rem;
+    }
+}

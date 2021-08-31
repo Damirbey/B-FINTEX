@@ -24,7 +24,7 @@ function BottomPost({posts})
                         </div>
                         <div className="postImage">
                             <Link to={`/posts/${post.id}`} className="link">
-                                <img src = {process.env.PUBLIC_URL + post.image} alt="post image"/>
+                                <img src = {process.env.PUBLIC_URL + post.image} alt="post image" className="imgClass"/>
                             </Link>
                         </div> 
                     </div>

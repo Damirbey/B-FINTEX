@@ -12,8 +12,13 @@
     height:auto;
 }
 .postFullContent {
-    line-height: 55px;
+    line-height: 35px;
     font-size: 1.2rem;
     text-align: justify;
     padding:10px;
+}
+@media only screen and (max-width:1000px){
+    .postContainer>h1{
+        font-size: 1.7rem;
+    }
 }

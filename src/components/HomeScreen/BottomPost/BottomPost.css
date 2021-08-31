@@ -1,7 +1,6 @@
 /************************** Bottom Post ********************************/
 .bottom-post{
     grid-area:bottom-post;
-    height: auto;
 }
 /************************** Styling Post ******************************/
 .post{
@@ -34,8 +33,8 @@
     grid-area:postImage;
 }
 .postImage>.link>img{
-    width: 430px;
-    height: 230px;
+    width:100%;
+    height:auto;
 }
 .date{
     font-style: italic;
@@ -46,7 +45,7 @@
 @media only screen and (max-width:1000px){
     .post{
        display:grid;
-       grid-template-columns: 1fr 1fr ;
+       grid-template-columns: 1fr 1fr;
        grid-template-areas: 
        "postHeader postImage";
        align-items: center;
@@ -59,7 +58,7 @@
         width:100%;
         height: auto;
     }
-    .postHeader > h1{
-        font-size: 1.5rem;
+    .postHeader>.link> h1{
+        font-size: 1rem;
     }
 }

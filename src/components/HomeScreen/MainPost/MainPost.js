@@ -13,7 +13,6 @@ function MainPost({post})
             <Link to={`/posts/${post[0].id}`} className="link">
                 <img src={process.env.PUBLIC_URL + post[0].image} className="mainPostImage" alt="post image"/>
             </Link>
-            
         </div>
     )
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import './Navigation.css';
+import logo from '../../images/logo/logo.png';
 import {Link} from 'react-router-dom';
 
 function Navigation(){
     return(
         <nav class="navbar navbar-expand-lg navbar-light">
-            <Link to="/">
+            <Link to="/B-FINTEX">
                 <a class="navbar-brand" href="#">
-                    <img src={process.env.PUBLIC_URL + `images/logo/logo.png`} class="logo"/> 
+                    <img src={logo} class="logo"/> 
                 </a>
             </Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
