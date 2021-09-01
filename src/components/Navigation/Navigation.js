@@ -29,7 +29,7 @@ function Navigation(){
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <Link>
+                        <Link to="/Register">
                             <a class="nav-link" href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
                         </Link>
                     </li>

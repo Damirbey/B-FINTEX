@@ -8,6 +8,7 @@ import NewsLettersScreen from '../components/NewsLettersScreen/NewsLettersScreen
 import PostScreen from '../components/PostScreen/PostScreen';
 import Footer from '../components/Footer/Footer';
 import SignIn from '../components/SignInScreen/SignIn';
+import Register from '../components/Register/Register';
 
 class App extends Component{
   render()
@@ -22,6 +23,7 @@ class App extends Component{
               <Route path="/posts/:id" component={PostScreen}/>
               <Route path="/Newsletters" component={NewsLettersScreen}/>
               <Route path="/SignIn" component={SignIn}/>
+              <Route path="/Register" component={Register}/>
               <Footer/>
           </Wrapper>
         </BrowserRouter>
