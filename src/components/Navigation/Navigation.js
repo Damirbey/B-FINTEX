@@ -29,10 +29,14 @@ function Navigation(){
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
+                        <Link>
+                            <a class="nav-link" href="#"><i class="fa fa-user-plus"></i> Sign Up</a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-in"></i> Login</a>
+                        <Link to="/SignIn">
+                            <a class="nav-link" href="#"><i class="fa fa-sign-in"></i> Login</a>
+                        </Link>
                     </li>
                 </ul>
             </div>

@@ -7,6 +7,7 @@ import AboutScreen from '../components/AboutScreen/AboutScreen';
 import NewsLettersScreen from '../components/NewsLettersScreen/NewsLettersScreen';
 import PostScreen from '../components/PostScreen/PostScreen';
 import Footer from '../components/Footer/Footer';
+import SignIn from '../components/SignInScreen/SignIn';
 
 class App extends Component{
   render()
@@ -20,6 +21,7 @@ class App extends Component{
               <Route path="/About" component={AboutScreen}/>
               <Route path="/posts/:id" component={PostScreen}/>
               <Route path="/Newsletters" component={NewsLettersScreen}/>
+              <Route path="/SignIn" component={SignIn}/>
               <Footer/>
           </Wrapper>
         </BrowserRouter>
