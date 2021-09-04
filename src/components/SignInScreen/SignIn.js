@@ -29,7 +29,7 @@ const SignIn = ()=>{
 
     return (
         <div className="signIn">
-            <p>Please log in</p>
+            <p>Please log in <i class="fa fa-sign-in"/></p>
             <input 
                 type="email" 
                 placeholder="Email address"
