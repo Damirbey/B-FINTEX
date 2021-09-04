@@ -1,20 +1,32 @@
-import React from 'react';
+import React , {useState} from 'react';
 import './SignIn.css';
-import logo from '../../images/logo/logo.png';
 
 const SignIn = ()=>{
-    var {email,password} = '';
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const onEmailChange=(event)=>{
-        email=event.target.value;
+        setEmail(event.target.value);
     }
-
+    
     const onPasswordChange=(event)=>{
-        password=event.target.value;
+        setPassword(event.target.value);
+    }
+    const highlightAllFieldsRed=()=>{
+        document.querySelectorAll("input")[0].style.border="1px solid red"; 
+        document.querySelectorAll("input")[1].style.border="1px solid red";
+    }
+    const onButtonClick = (event)=>{
+        if(email.length === 0 || password.length === 0)
+        {
+            alert("Please fill in all the fields");
+            highlightAllFieldsRed();
+        }
+        else{
+            alert("Email is "+email+" and password is "+password);
+        }
     }
 
-    const onButtonClick = (event)=>{
-        alert("Email is "+email+" and password is "+password);
-    }
     return (
         <div className="signIn">
             <p>Please log in</p>
@@ -23,7 +35,6 @@ const SignIn = ()=>{
                 placeholder="Email address"
                 onChange={onEmailChange}
             />
-
             <input 
                 type="password" 
                 placeholder="Password"
