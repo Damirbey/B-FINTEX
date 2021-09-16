@@ -64,4 +64,21 @@ const posts = [
     }
 ]
 
-export default posts;
+const users=[
+    {
+        id:1,
+        name:"Max",
+        surname:"Holloway",
+        password:"123",
+        email:"max@gmail.com"
+    },
+    {
+        id:2,
+        name:"Global",
+        surname:"Admin",
+        password:"123",
+        email:"admin@gmail.com"
+    }
+]
+
+export {posts,users};

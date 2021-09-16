@@ -1,7 +1,8 @@
 import React , {useState} from 'react';
+import {users} from '../../data';
 import './SignIn.css';
 
-const SignIn = ()=>{
+const SignIn = ({changeIsLoggedInState,changeUserIDState})=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,7 +24,17 @@ const SignIn = ()=>{
             highlightAllFieldsRed();
         }
         else{
-            alert("Email is "+email+" and password is "+password);
+            let foundUser = users.filter((user)=>{
+                return user.email === email && user.password === password;
+            });
+            if(foundUser.length>0)
+            {
+                changeIsLoggedInState();
+                changeUserIDState(foundUser[0]);
+            }
+            else{
+                alert("Wrong credentials, please try again or register");
+            }
         }
     }
 

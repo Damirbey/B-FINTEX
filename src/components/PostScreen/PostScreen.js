@@ -1,5 +1,5 @@
 import React from 'react';
-import posts from '../../data';
+import {posts} from '../../data';
 import './PostScreen.css';
 
 function PostScreen(props){

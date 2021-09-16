@@ -3,7 +3,7 @@ import './HomeScreen.css';
 import MainPost from './MainPost/MainPost';
 import SidePost from './SidePost/SidePost';
 import BottomPost from './BottomPost/BottomPost';
-import posts from '../../data';
+import {posts} from '../../data';
 
 function HomeScreen()
 {

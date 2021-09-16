@@ -11,18 +11,41 @@ import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
 
 class App extends Component{
+  constructor(){
+    super();
+    this.state={
+      isLoggedIn:false,
+      user:""
+    }
+  }
+
+  changeIsLoggedInState=()=>{
+    this.setState({isLoggedIn:true})
+  }
+  
+  changeUserIDState=(newState)=>{
+    this.setState({user:newState[0]});   
+  }
+
+  logOut=()=>{
+    this.setState({isLoggedIn:false});
+    this.setState({user:""});
+  }
+
   render()
   {
+    const {isLoggedIn,user} = this.state;
+    console.log()
     return(
       <React.Fragment>
         <BrowserRouter>
-          <Navigation/>
+          <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
           <Wrapper>
               <Route path="/B-FINTEX" component={HomeScreen} exact/>
               <Route path="/About" component={AboutScreen}/>
               <Route path="/posts/:id" component={PostScreen}/>
               <Route path="/Newsletters" component={NewsLettersScreen}/>
-              <Route path="/SignIn" component={SignIn}/>
+              <Route path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState}/>}/>
               <Route path="/Register" component={Register}/>
               <Footer/>
           </Wrapper>
