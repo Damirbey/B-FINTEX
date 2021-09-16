@@ -24,7 +24,7 @@ class App extends Component{
   }
   
   changeUserIDState=(newState)=>{
-    this.setState({user:newState[0]});   
+    this.setState({user:newState});   
   }
 
   logOut=()=>{
@@ -35,7 +35,6 @@ class App extends Component{
   render()
   {
     const {isLoggedIn,user} = this.state;
-    console.log()
     return(
       <React.Fragment>
         <BrowserRouter>

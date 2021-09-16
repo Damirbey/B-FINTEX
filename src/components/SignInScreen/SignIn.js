@@ -1,4 +1,5 @@
 import React , {useState} from 'react';
+import { Redirect } from 'react-router';
 import {users} from '../../data';
 import './SignIn.css';
 
@@ -31,6 +32,7 @@ const SignIn = ({changeIsLoggedInState,changeUserIDState})=>{
             {
                 changeIsLoggedInState();
                 changeUserIDState(foundUser[0]);
+                <Redirect to="/B-FINTEX"/>
             }
             else{
                 alert("Wrong credentials, please try again or register");
