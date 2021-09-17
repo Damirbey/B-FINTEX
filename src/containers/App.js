@@ -44,8 +44,9 @@ class App extends Component{
               <Route path="/About" component={AboutScreen}/>
               <Route path="/posts/:id" component={PostScreen}/>
               <Route path="/Newsletters" component={NewsLettersScreen}/>
-              <Route path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState}/>}/>
+              <Route path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState} isLoggedIn={isLoggedIn}/>}/>
               <Route path="/Register" component={Register}/>
+       
               <Footer/>
           </Wrapper>
         </BrowserRouter>
