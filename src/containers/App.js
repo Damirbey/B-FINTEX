@@ -38,7 +38,7 @@ class App extends Component{
     return(
       <React.Fragment>
         <BrowserRouter>
-          <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
+        <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
           <Wrapper>
               <Route path="/B-FINTEX" component={HomeScreen} exact/>
               <Route path="/About" component={AboutScreen}/>
@@ -46,7 +46,6 @@ class App extends Component{
               <Route path="/Newsletters" component={NewsLettersScreen}/>
               <Route path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState} isLoggedIn={isLoggedIn}/>}/>
               <Route path="/Register" component={Register}/>
-       
               <Footer/>
           </Wrapper>
         </BrowserRouter>

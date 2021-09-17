@@ -5,10 +5,14 @@ import {users} from '../../data';
 import './SignIn.css';
 
 const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
-   
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
-        const history = useHistory();
+        function redirectHome()
+        {
+            const history = useHistory();
+            history.push('/B-FINTEX');
+        }
+      
         const onEmailChange=(event)=>{
             setEmail(event.target.value);
         }
@@ -34,7 +38,7 @@ const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
                 {
                     changeIsLoggedInState();
                     changeUserIDState(foundUser[0]);
-                    history.push('/B-FINTEX')
+                    redirectHome();
                 }
                 else{
                     alert("Wrong credentials, please try again or register");
