@@ -15,7 +15,8 @@ class App extends Component{
     super();
     this.state={
       isLoggedIn:false,
-      user:""
+      user:"",
+      route:""
     }
   }
 
@@ -35,7 +36,6 @@ class App extends Component{
   render()
   {
     const {isLoggedIn,user} = this.state;
-
     return(
       <React.Fragment>
         <BrowserRouter>
