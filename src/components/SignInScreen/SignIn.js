@@ -7,12 +7,8 @@ import './SignIn.css';
 const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
-        function redirectHome()
-        {
-            const history = useHistory();
-            history.push('/B-FINTEX');
-        }
-      
+        const history = useHistory();
+                
         const onEmailChange=(event)=>{
             setEmail(event.target.value);
         }
@@ -38,7 +34,7 @@ const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
                 {
                     changeIsLoggedInState();
                     changeUserIDState(foundUser[0]);
-                    redirectHome();
+                    history.push('/B-FINTEX');
                 }
                 else{
                     alert("Wrong credentials, please try again or register");

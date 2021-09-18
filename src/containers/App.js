@@ -35,6 +35,7 @@ class App extends Component{
   render()
   {
     const {isLoggedIn,user} = this.state;
+
     return(
       <React.Fragment>
         <BrowserRouter>
