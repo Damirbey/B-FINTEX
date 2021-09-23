@@ -1,13 +1,16 @@
 import React,{useState} from 'react';
+import { useHistory } from "react-router-dom";
+import {users} from '../../data';
 import './Register.css';
 
-const Register=()=>{
+const Register=({changeUserState,changeIsLoggedInState})=>{
     const [firstName, setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [email,setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    
+    const history = useHistory();
+
     const onFirstNameChange = (event)=>{
         setFirstName(event.target.value);
         document.querySelectorAll("input")[0].style.border=""; 
@@ -41,7 +44,32 @@ const Register=()=>{
             {
                 if(password === confirmPassword)
                 {
-                    alert("User registered successfully");
+                    var foundUser = users.filter((user)=>{return user.email === email});
+                    if(foundUser.length>0)
+                    {
+                        alert("User already exist in the system, please use other credentials"+foundUser);
+                        console.log(foundUser);
+                    }
+                    else
+                    {
+                        const newUser = {
+                            id:users.length+1,
+                            name:firstName,
+                            surname:lastName,
+                            password:password,
+                            email:email
+                        }
+                        if(users.push(newUser)){
+                            alert("User registered successfully");
+                            changeIsLoggedInState();
+                            changeUserState(newUser);
+                            history.push('/B-FINTEX');
+                        }
+                        else
+                        {
+                            alert("Can not register user at the moment");
+                        }
+                    }
                 }
                 else{
                     alert("Passwords do not match");

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import {users} from '../../data';
 import './SignIn.css';
 
-const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
+const SignIn = ({changeIsLoggedInState,changeUserState})=>{
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         const history = useHistory();
@@ -33,7 +33,7 @@ const SignIn = ({changeIsLoggedInState,changeUserIDState,isLoggedIn})=>{
                 if(foundUser.length>0)
                 {
                     changeIsLoggedInState();
-                    changeUserIDState(foundUser[0]);
+                    changeUserState(foundUser[0]);
                     history.push('/B-FINTEX');
                 }
                 else{

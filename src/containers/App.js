@@ -24,7 +24,7 @@ class App extends Component{
     this.setState({isLoggedIn:true})
   }
   
-  changeUserIDState=(newState)=>{
+  changeUserState=(newState)=>{
     this.setState({user:newState});   
   }
 
@@ -46,8 +46,8 @@ class App extends Component{
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/Newsletters" component={NewsLettersScreen}/> 
               <Switch>
-                <ProtectedRoute exact path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState} isLoggedIn={isLoggedIn}/>}/>
-                <ProtectedRoute path="/Register" component={Register} isLoggedIn={isLoggedIn}/>
+                <ProtectedRoute exact path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>}/>
+                <ProtectedRoute path="/Register" component={()=><Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>}/>
               </Switch>
               <Footer/>
           </Wrapper>
