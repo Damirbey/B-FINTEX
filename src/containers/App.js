@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route , Switch } from 'react-router-dom';
 import Navigation from '../components/Navigation/Navigation';
 import Wrapper from '../components/Wrapper/Wrapper';
 import HomeScreen from '../components/HomeScreen/HomeScreen';
@@ -9,7 +9,7 @@ import PostScreen from '../components/PostScreen/PostScreen';
 import Footer from '../components/Footer/Footer';
 import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
-
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 class App extends Component{
   constructor(){
     super();
@@ -39,14 +39,16 @@ class App extends Component{
     return(
       <React.Fragment>
         <BrowserRouter>
-        <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
+          <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
           <Wrapper>
-              <Route path="/B-FINTEX" component={HomeScreen} exact/>
-              <Route path="/About" component={AboutScreen}/>
-              <Route path="/posts/:id" component={PostScreen}/>
-              <Route path="/Newsletters" component={NewsLettersScreen}/>
-              <Route path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState} isLoggedIn={isLoggedIn}/>}/>
-              <Route path="/Register" component={Register}/>
+              <Route exact path="/B-FINTEX" component={HomeScreen}/>
+              <Route exact path="/About" component={AboutScreen}/>
+              <Route exact path="/posts/:id" component={PostScreen}/>
+              <Route exact path="/Newsletters" component={NewsLettersScreen}/> 
+              <Switch>
+                <ProtectedRoute exact path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserIDState={this.changeUserIDState} isLoggedIn={isLoggedIn}/>}/>
+                <ProtectedRoute path="/Register" component={Register} isLoggedIn={isLoggedIn}/>
+              </Switch>
               <Footer/>
           </Wrapper>
         </BrowserRouter>
