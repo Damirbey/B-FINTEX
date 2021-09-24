@@ -35,9 +35,13 @@ function BottomPost({posts})
                     )
                 })
             }
-                <div id="loadMore">
-                    <a href="#">Load More</a>
-                </div> 
+                {
+                    numberOfVisiblePosts < posts.length && 
+                    <div className="loadMore">
+                        <a onClick={loadMorePosts}>Load More</a>
+                    </div> 
+                }
+                
         </div>
     )
 }

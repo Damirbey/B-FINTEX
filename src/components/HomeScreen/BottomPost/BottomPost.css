@@ -63,24 +63,23 @@
     }
 }
 /************************** Styling Load More Button ******************************/
-#loadMore {
-    width: 200px;
-    color: #fff;
-    display: block;
+.loadMore {
+    color:#fff !important;
     text-align: center;
-    margin: 20px auto;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background-color: blue;
-    transition: .3s;
-  }
-  a{
-      color:#fff !important;
-  }
-  #loadMore:hover {
-    color: blue;
-    background-color: #fff;
-    border: 1px solid blue;
-    text-decoration: none;
-  }
+    background-color: #292b2c;
+    width:200px;
+    padding:20px;
+    margin:0 auto;
+    margin-bottom:20px;
+}
+a{
+    color:white !important
+}
+@media only screen and (max-width:1000px){
+    .loadMore {
+        width: 120px;
+    }
+    .loadMore a{
+        font-size: 1rem;
+    }
+}
