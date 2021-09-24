@@ -1,13 +1,17 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link } from 'react-router-dom';
 import './BottomPost.css';
 
 function BottomPost({posts})
 {
+    const [numberOfVisiblePosts, setNumberOfVisiblePosts] = useState(2);
+    const loadMorePosts = ()=>{
+        setNumberOfVisiblePosts((prevValue)=>prevValue+2);
+    }
     return(
         <div className="bottom-post">
             {
-                posts.map((post,index)=>{
+                posts.slice(0,numberOfVisiblePosts).map((post,index)=>{
                     return (
                     <div className="post" key={index}>
                         <div className="postHeader">
@@ -31,7 +35,9 @@ function BottomPost({posts})
                     )
                 })
             }
-                     
+                <div id="loadMore">
+                    <a href="#">Load More</a>
+                </div> 
         </div>
     )
 }
