@@ -9,7 +9,9 @@ import PostScreen from '../components/PostScreen/PostScreen';
 import Footer from '../components/Footer/Footer';
 import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
+//import AdminPanel from '../components/AdminPanel/AdminPanel';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+
 class App extends Component{
   constructor(){
     super();
@@ -45,6 +47,7 @@ class App extends Component{
               <Route exact path="/About" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/Newsletters" component={NewsLettersScreen}/> 
+              
               <Switch>
                 <ProtectedRoute exact path="/SignIn" component={()=><SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>}/>
                 <ProtectedRoute path="/Register" component={()=><Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>}/>

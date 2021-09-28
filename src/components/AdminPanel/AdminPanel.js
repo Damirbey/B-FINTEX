@@ -1,8 +1,12 @@
 import React from 'react';
+import Dashboard from './Dashboard/Dashboard';
+import Sidebar from './SideBar/SideBar';
 
 const AdminPanel = ()=>{
     return(
-        <h1>Admin Panel</h1>
+        <div>
+            h
+        </div>
     )
 }
 

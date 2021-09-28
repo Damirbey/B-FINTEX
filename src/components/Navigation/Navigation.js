@@ -25,6 +25,11 @@ function Navigation({isLoggedIn,user,logOut}){
                         <Link to="/NewsLetters">
                             <a class="nav-link">Newsletters</a>
                         </Link>
+                    </li> 
+                    <li class="nav-item">
+                        <Link to="/AdminPanel">
+                            <a class="nav-link">Admin Panel</a>
+                        </Link>
                     </li>            
                 </ul>
                 {
