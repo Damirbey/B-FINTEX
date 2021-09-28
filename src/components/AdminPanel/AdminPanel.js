@@ -4,9 +4,12 @@ import Sidebar from './SideBar/SideBar';
 
 const AdminPanel = ()=>{
     return(
-        <div>
-            h
-        </div>
+        <div class="container-fluid" id="main">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <Sidebar/>
+                <Dashboard/>
+            </div>
+        </div>  
     )
 }
 
