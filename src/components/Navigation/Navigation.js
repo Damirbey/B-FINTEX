@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 function Navigation({isLoggedIn,user,logOut}){
     return(
         <nav class="navbar navbar-expand-lg navbar-light">
-            <Link to="/B-FINTEX">
+            <Link to="/b-fintex">
                 <a class="navbar-brand" href="#">
                     <img src={logo} class="logo"/> 
                 </a>
@@ -17,19 +17,19 @@ function Navigation({isLoggedIn,user,logOut}){
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <Link to="/About">
+                        <Link to="/about">
                             <a class="nav-link">About Us</a>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link to="/NewsLetters">
+                        <Link to="/newsLetters">
                             <a class="nav-link">Newsletters</a>
                         </Link>
                     </li> 
                     {
                         user.id===2 && isLoggedIn&& 
                         <li class="nav-item">
-                        <Link to="/AdminPanel">
+                        <Link to="/adminpanel">
                             <a class="nav-link">Admin Panel</a>
                         </Link>
                     </li>
@@ -50,12 +50,12 @@ function Navigation({isLoggedIn,user,logOut}){
                     :
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <Link to="/Register">
+                            <Link to="/register">
                                 <a class="nav-link" href="#"><i class="fa fa-user-plus"/> Register</a>
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/SignIn">
+                            <Link to="/signIn">
                                 <a class="nav-link" href="#"><i class="fa fa-sign-in"/> Log In</a>
                             </Link>
                         </li>

@@ -34,7 +34,7 @@ const SignIn = ({changeIsLoggedInState,changeUserState})=>{
                 {
                     changeIsLoggedInState();
                     changeUserState(foundUser[0]);
-                    history.push('/B-FINTEX');
+                    history.push('/b-fintex');
                 }
                 else{
                     alert("Wrong credentials, please try again or register");

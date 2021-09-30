@@ -1,0 +1,11 @@
+.adminLink{
+    color:#000000 !important;
+}
+
+.adminLink:hover{
+    color:#394DF7 !important;
+}
+
+.adminLink:visited{
+    color:brown;
+}

@@ -63,7 +63,7 @@ const Register=({changeUserState,changeIsLoggedInState})=>{
                             alert("User registered successfully");
                             changeIsLoggedInState();
                             changeUserState(newUser);
-                            history.push('/B-FINTEX');
+                            history.push('/b-fintex');
                         }
                         else
                         {

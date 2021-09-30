@@ -10,6 +10,7 @@ import Footer from '../components/Footer/Footer';
 import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
 import AdminPanel from '../components/AdminPanel/AdminPanel';
+import AllPosts from '../components/AdminPanel/AllPosts';
 
 class App extends Component{
   constructor(){
@@ -42,14 +43,15 @@ class App extends Component{
         <BrowserRouter>
           <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
           <Wrapper>
-              <Route exact path="/B-FINTEX" component={HomeScreen}/>
-              <Route exact path="/About" component={AboutScreen}/>
+              <Route exact path="/b-fintex" component={HomeScreen}/>
+              <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
-              <Route exact path="/Newsletters" component={NewsLettersScreen}/> 
+              <Route exact path="/newsletters" component={NewsLettersScreen}/> 
               <Switch>
-                <Route path="/AdminPanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/B-FINTEX" /> : <AdminPanel />)} />
-                <Route path="/SignIn" render={() => (isLoggedIn ? <Redirect to="/B-FINTEX" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
-                <Route path="/Register" render={() => (isLoggedIn ? <Redirect to="/B-FINTEX" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />
+                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel />)} />
+                <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />
+                <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
+                <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />
               </Switch>
               <Footer/>
           </Wrapper>
