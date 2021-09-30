@@ -3,7 +3,7 @@ nav{
     background-color: #ffffff;
     padding:2px;   
 }
-a{
+.nav-link{
     text-decoration: none;
     color: #394DF7 !important;
     font-size:1.2rem;
