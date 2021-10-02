@@ -23,13 +23,13 @@ const AdminPanel = ()=>{
                     {
                         users.map((user)=>{
                             return(
-                            <tr>
+                            <tr key={user.id}>
                                 <th scope="row">{user.id}</th>
                                 <td>{user.name}</td>
                                 <td>{user.surname}</td>
                                 <td>{user.email}</td>
                                 <td>{user.active}</td>
-                                <td><button type="button" class="btn btn-primary">Edit</button> {user.id!==2 && <button type="button" class="btn btn-danger">Delete</button>}</td>
+                                <td><Link to={`/users/${user.id}`}><button type="button" class="btn btn-primary">Edit</button></Link> {user.id!==2 && <button type="button" class="btn btn-danger">Delete</button>}</td>
                             </tr>)
                         })
                     }

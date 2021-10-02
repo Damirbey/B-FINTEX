@@ -11,6 +11,7 @@ import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
 import AdminPanel from '../components/AdminPanel/AdminPanel';
 import AllPosts from '../components/AdminPanel/AllPosts';
+import User from '../components/AdminPanel/User';
 
 class App extends Component{
   constructor(){
@@ -47,6 +48,7 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
+              <Route exact path="users/:id" component={User} />
               <Switch>
                 <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel />)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />
