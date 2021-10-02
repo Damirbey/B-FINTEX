@@ -9,3 +9,6 @@
 .adminLink:visited{
     color:brown;
 }
+table{
+    cursor: pointer;
+}

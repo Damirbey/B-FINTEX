@@ -88,14 +88,32 @@ const users=[
         name:"Max",
         surname:"Holloway",
         password:"123",
-        email:"max@gmail.com"
+        email:"max@gmail.com",
+        active:"Yes"
     },
     {
         id:2,
         name:"Global",
         surname:"Admin",
         password:"123",
-        email:"admin@gmail.com"
+        email:"admin@gmail.com",
+        active:"Yes"
+    },
+    {
+        id:3,
+        name:"Eduard",
+        surname:"Mendy",
+        password:"123",
+        email:"emendy@gmail.com",
+        active:"Yes"
+    },
+    {
+        id:4,
+        name:"Timo",
+        surname:"Werner",
+        password:"123",
+        email:"twerner@gmail.com",
+        active:"Yes"
     }
 ]
 
