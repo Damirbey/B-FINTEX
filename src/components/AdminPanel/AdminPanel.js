@@ -3,8 +3,8 @@ import './AdminPanel.css';
 import {Link} from 'react-router-dom';
 import { users, posts } from '../../data';
 
-const AdminPanel = ()=>{
-    
+const AdminPanel = ({onRouteChange, setClickedUserId})=>{
+
     const [searchString, setSearchString] = useState('');
 
     const onInputChange=(event)=>{
@@ -14,6 +14,10 @@ const AdminPanel = ()=>{
         return user.name.toLowerCase().includes(searchString.toLowerCase()) || user.surname.toLowerCase().includes(searchString.toLowerCase())
     })
 
+    const onUserClick=(userId)=>{
+        onRouteChange('userProfile');
+        setClickedUserId(userId);
+    }
     return(
        <div>
            <p><Link className="adminLink" to="/adminpanel">All Users</Link> / <Link className="adminLink" to="/allposts">Posts</Link> / </p>
@@ -39,13 +43,15 @@ const AdminPanel = ()=>{
                     {
                         filteredUsers.map((user)=>{
                             return(
-                            <tr key={user.id}>
-                                <th scope="row">{user.id}</th>
-                                <td>{user.name}</td>
-                                <td>{user.surname}</td>
-                                <td>{user.email}</td>
-                                <td>{user.active}</td>
-                            </tr>)
+                            
+                                <tr key={user.id} onClick={onUserClick(user.id)}>
+                                    <th scope="row">{user.id}</th>
+                                    <td>{user.name}</td>
+                                    <td>{user.surname}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.active}</td>
+                                </tr>
+                            )
                         })
                     }
                 </tbody>

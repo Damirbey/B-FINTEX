@@ -35,7 +35,12 @@ class App extends Component{
     this.setState({isLoggedIn:false});
     this.setState({user:""});
   }
-
+  onRouteChange=(newRoute)=>{
+    this.setState({newRoute});
+  }
+  setClickedUserId=(userId)=>{
+    console.log("New User id is ",userId);
+  }
   render()
   {
     const {isLoggedIn,user} = this.state;
@@ -50,7 +55,7 @@ class App extends Component{
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
               <Route exact path="users/:id" component={User} />
               <Switch>
-                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel />)} />
+                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel onRouteChange={this.onRouteChange} setClickedUserId={this.setClickedUserId}/>)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
                 <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />
