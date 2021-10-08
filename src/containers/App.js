@@ -13,16 +13,22 @@ import AdminPanel from '../components/AdminPanel/AdminPanel';
 import AllPosts from '../components/AdminPanel/AllPosts';
 import User from '../components/AdminPanel/User';
 
+const initialState={
+  isLoggedIn:false,
+  user:"",
+  route:"",
+  userId:""
+}
 class App extends Component{
   constructor(){
     super();
     this.state={
       isLoggedIn:false,
       user:"",
-      route:""
+      route:"",
+      userId:""
     }
   }
-
   changeIsLoggedInState=()=>{
     this.setState({isLoggedIn:true})
   }
@@ -32,14 +38,14 @@ class App extends Component{
   }
 
   logOut=()=>{
-    this.setState({isLoggedIn:false});
-    this.setState({user:""});
+    this.setState(initialState)
   }
   onRouteChange=(newRoute)=>{
-    this.setState({newRoute});
+    this.setState({route:newRoute});
+    console.log(newRoute);
   }
-  setClickedUserId=(userId)=>{
-    console.log("New User id is ",userId);
+  setClickedUserId=(receivedUserId)=>{
+    this.setState({userId:receivedUserId});
   }
   render()
   {
@@ -53,7 +59,10 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
-              <Route exact path="users/:id" component={User} />
+              <Route exact path="/user" render={()=> <User userId={this.state.userId}/>} />
+              {this.state.route === 'user'&&
+                <Redirect to="/user"/>
+              }
               <Switch>
                 <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel onRouteChange={this.onRouteChange} setClickedUserId={this.setClickedUserId}/>)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />

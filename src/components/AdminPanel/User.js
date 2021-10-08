@@ -1,8 +1,8 @@
 import React from 'react';
 
-const User=(props)=>{
+const User=({userId})=>{
     return (
-        <p>ahshshhs</p>
+        <p>{userId}</p>
     )
 
 }

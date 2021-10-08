@@ -15,7 +15,7 @@ const AdminPanel = ({onRouteChange, setClickedUserId})=>{
     })
 
     const onUserClick=(userId)=>{
-        onRouteChange('userProfile');
+        onRouteChange("user");
         setClickedUserId(userId);
     }
     return(
@@ -44,7 +44,7 @@ const AdminPanel = ({onRouteChange, setClickedUserId})=>{
                         filteredUsers.map((user)=>{
                             return(
                             
-                                <tr key={user.id} onClick={onUserClick(user.id)}>
+                                <tr key={user.id} onClick={()=>onUserClick(user.id)}>
                                     <th scope="row">{user.id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.surname}</td>
