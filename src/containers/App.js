@@ -15,18 +15,14 @@ import User from '../components/AdminPanel/User';
 
 const initialState={
   isLoggedIn:false,
-  user:"",
-  route:"",
-  userId:""
+  user:""
 }
 class App extends Component{
   constructor(){
     super();
     this.state={
       isLoggedIn:false,
-      user:"",
-      route:"",
-      userId:""
+      user:""
     }
   }
   changeIsLoggedInState=()=>{
@@ -59,10 +55,7 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
-              <Route exact path="/user" render={()=> <User userId={this.state.userId}/>} />
-              {this.state.route === 'user'&&
-                <Redirect to="/user"/>
-              }
+              <Route exact path="/user/:id" component={User} />
               <Switch>
                 <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel onRouteChange={this.onRouteChange} setClickedUserId={this.setClickedUserId}/>)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />

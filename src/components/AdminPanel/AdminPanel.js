@@ -1,11 +1,12 @@
 import React , {useState} from 'react';
 import './AdminPanel.css';
-import {Link} from 'react-router-dom';
+import {Link, Redirect,useHistory} from 'react-router-dom';
 import { users, posts } from '../../data';
 
 const AdminPanel = ({onRouteChange, setClickedUserId})=>{
 
     const [searchString, setSearchString] = useState('');
+    const history = useHistory();
 
     const onInputChange=(event)=>{
         setSearchString(event.target.value);
@@ -15,8 +16,9 @@ const AdminPanel = ({onRouteChange, setClickedUserId})=>{
     })
 
     const onUserClick=(userId)=>{
-        onRouteChange("user");
-        setClickedUserId(userId);
+        /*onRouteChange("user");
+        setClickedUserId(userId);*/
+        history.push(`/user/${userId}`);
     }
     return(
        <div>
