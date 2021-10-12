@@ -11,7 +11,7 @@ import SignIn from '../components/SignInScreen/SignIn';
 import Register from '../components/Register/Register';
 import AdminPanel from '../components/AdminPanel/AdminPanel';
 import AllPosts from '../components/AdminPanel/AllPosts';
-import User from '../components/AdminPanel/User';
+import UserProfile from '../components/AdminPanel/UserProfile/UserProfile';
 
 const initialState={
   isLoggedIn:false,
@@ -55,7 +55,7 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
-              <Route exact path="/user/:id" component={User} />
+              <Route exact path="/user/:id" component={UserProfile}/>
               <Switch>
                 <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel onRouteChange={this.onRouteChange} setClickedUserId={this.setClickedUserId}/>)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AllPosts />)} />
