@@ -42,7 +42,8 @@ const UserProfile=(props)=>{
      /** Cosmetic functions to enable, disable and highlight required fields*/
     const exitEditableMode=()=>{
          setEditableMode(false);
-         for(var i=0;i<3;i++)
+         const numberOfEditableFields = document.querySelectorAll(".editable").length;
+         for(var i = 0;i < numberOfEditableFields;i++)
          {
              document.querySelectorAll(".editable")[i].readOnly = true;
          }
@@ -52,7 +53,8 @@ const UserProfile=(props)=>{
     }
     const enableFields=()=>{
          setEditableMode(true);
-         for(var i=0;i<3;i++)
+         const numberOfEditableFields = document.querySelectorAll(".editable").length;
+         for(var i=0;i < numberOfEditableFields; i++)
          document.querySelectorAll(".editable")[i].readOnly = false;
     }
     const resetField=(id)=>{
@@ -209,6 +211,12 @@ const UserProfile=(props)=>{
                                <input type="email" className="form-control editable" id="email" placeholder="Enter email ID" defaultValue={user[0].email} onChange={onEmailChange} readOnly/>
                            </div>
                        </div>
+                       <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                           <div className="form-group">
+                               <label for="status">Active</label>
+                               <input type="text" className="form-control" id="status" placeholder="Current Status" defaultValue={user[0].active} readOnly/>
+                           </div>
+                       </div>
                        {
                            editableMode &&
                            <React.Fragment>
@@ -229,7 +237,7 @@ const UserProfile=(props)=>{
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="dateJoined">Date Joined </label>
-                               <input type="text" className="form-control" id="dateJoined" value={user[0].joined} disabled/>
+                               <input type="text" className="form-control" id="dateJoined" value={user[0].joinedDate} disabled/>
                            </div>
                        </div>
                    </div>

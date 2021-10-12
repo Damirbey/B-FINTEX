@@ -89,6 +89,7 @@ const users=[
         surname:"Holloway",
         password:"123",
         email:"max@gmail.com",
+        joinedDate:"2021-01-02",
         active:"Yes"
     },
     {
@@ -97,6 +98,7 @@ const users=[
         surname:"Admin",
         password:"123",
         email:"admin@gmail.com",
+        joinedDate:"2021-01-03",
         active:"Yes"
     },
     {
@@ -105,6 +107,7 @@ const users=[
         surname:"Mendy",
         password:"123",
         email:"emendy@gmail.com",
+        joinedDate:"2021-01-05",
         active:"Yes"
     },
     {
@@ -113,6 +116,7 @@ const users=[
         surname:"Werner",
         password:"123",
         email:"twerner@gmail.com",
+        joinedDate:"2021-01-06",
         active:"Yes"
     }
 ]
