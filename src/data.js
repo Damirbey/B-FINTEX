@@ -118,6 +118,33 @@ const users=[
         email:"twerner@gmail.com",
         joinedDate:"2021-01-06",
         active:"Yes"
+    },
+    {
+        id:5,
+        name:"Romelu",
+        surname:"Lukaku",
+        password:"123",
+        email:"twerner@gmail.com",
+        joinedDate:"2021-01-06",
+        active:"Yes"
+    },
+    {
+        id:6,
+        name:"Fernando",
+        surname:"Torres",
+        password:"123",
+        email:"twerner@gmail.com",
+        joinedDate:"2021-01-06",
+        active:"Yes"
+    },
+    {
+        id:7,
+        name:"Cesar",
+        surname:"Azpilicueta",
+        password:"123",
+        email:"twerner@gmail.com",
+        joinedDate:"2021-01-06",
+        active:"Yes"
     }
 ]
 
