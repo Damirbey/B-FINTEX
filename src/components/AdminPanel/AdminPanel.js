@@ -2,16 +2,25 @@ import React , {useState} from 'react';
 import './AdminPanel.css';
 import {Link, Redirect,useHistory} from 'react-router-dom';
 import { users, posts } from '../../data';
+import ReactPaginate from 'react-paginate';
 
 const AdminPanel = ({onRouteChange, setClickedUserId})=>{
 
     const [searchString, setSearchString] = useState('');
     const history = useHistory();
+    const [pageNumber, setPageNumber] = useState(0);
+    const usersPerPage = 2;
+    const pagesVisited = pageNumber * usersPerPage;
 
+    const displayUsers = users.slice(pagesVisited,usersPerPage + pagesVisited);
+    const pageCount = Math.ceil(users.length/usersPerPage);
+    const changePage = ({selected}) =>{
+        setPageNumber(selected);
+    }
     const onInputChange=(event)=>{
         setSearchString(event.target.value);
     }
-    const filteredUsers = users.filter((user)=>{
+    const filteredUsers = displayUsers.filter((user)=>{
         return user.name.toLowerCase().includes(searchString.toLowerCase()) || user.surname.toLowerCase().includes(searchString.toLowerCase())
     })
 
@@ -56,8 +65,20 @@ const AdminPanel = ({onRouteChange, setClickedUserId})=>{
                             )
                         })
                     }
+                    
                 </tbody>
             </table>
+            <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                    />
        </div>
     )
 }
