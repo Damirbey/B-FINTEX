@@ -7,7 +7,6 @@ const AdminPanel = ()=>{
 
     return(
        <div>
-           <p><Link className="adminLink" to="/adminpanel">All Users</Link> / <Link className="adminLink" to="/allposts">Posts</Link> / </p>
            <Users/>
        </div>
     )

@@ -12,6 +12,7 @@ import Register from '../components/Register/Register';
 import AdminPanel from '../components/AdminPanel/AdminPanel';
 import Posts from '../components/AdminPanel/Posts/Posts';
 import UserProfile from '../components/AdminPanel/Users/UserProfile/UserProfile';
+import PostDetail from '../components/AdminPanel/Posts/PostDetail/PostDetail';
 
 const initialState={
   isLoggedIn:false,
@@ -36,13 +37,7 @@ class App extends Component{
   logOut=()=>{
     this.setState(initialState)
   }
-  onRouteChange=(newRoute)=>{
-    this.setState({route:newRoute});
-    console.log(newRoute);
-  }
-  setClickedUserId=(receivedUserId)=>{
-    this.setState({userId:receivedUserId});
-  }
+
   render()
   {
     const {isLoggedIn,user} = this.state;
@@ -56,8 +51,9 @@ class App extends Component{
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
               <Route exact path="/user/:id" component={UserProfile}/>
+              <Route exact path="/post/:id" component={PostDetail}/>
               <Switch>
-                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel onRouteChange={this.onRouteChange} setClickedUserId={this.setClickedUserId}/>)} />
+                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel />)} />
                 <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <Posts />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
                 <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />

@@ -1,16 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState} from 'react';
+import AdministratorNavigation from '../AdminNavigation/AdministratorNavigation';
+import { Link, useHistory } from 'react-router-dom';
+import { posts } from '../../../data';
+import ReactPaginate from 'react-paginate';
 
 const Posts = ()=>{
+    /**React pagination */
+    const [pageNumber, setPageNumber] = useState(0);
+    const postsPerPage = 5;
+    const pagesVisited = pageNumber * postsPerPage;
+
+    const displayPosts = posts.slice(pagesVisited,postsPerPage + pagesVisited);
+    const pageCount = Math.ceil(posts.length/postsPerPage);
+    const changePage = ({selected}) =>{
+        setPageNumber(selected);
+    }
+   /***Filtering all posts */
+    const [searchString,setSearchString] = useState('');
+    const onInputChange=(event)=>{
+        setSearchString(event.target.value);
+    }
+
+    const filteredPosts = displayPosts.filter(post=>
+        post.title.toLowerCase().includes(searchString.toLowerCase()) || post.author.toLowerCase().includes(searchString.toLowerCase())
+    )
+    /**Redirecting to the selected post */
+    const history = useHistory();
+    const onPostClick=(postID)=>{
+        history.push(`/post/${postID}`);
+    }
     return(
         <div>
-            <p><Link className="adminLink" to="/adminpanel">All Users</Link> / <Link className="adminLink" to="/allposts">Posts</Link> / </p>
+            <AdministratorNavigation/>
             <input 
             className="form-control mr-sm-2 " 
             type="search" 
             placeholder="Search Post by Title or Author Name" 
             aria-label="Search"
-            //onChange={onInputChange}
+            onChange={onInputChange}
             />
             <br/>
             <table class="table table-striped table-hover">
@@ -19,33 +46,38 @@ const Posts = ()=>{
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
+                    <th scope="col">Post Category</th>
                     <th scope="col">Date published</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        /*filteredUsers.map((user)=>{
+                        filteredPosts.map((post)=>{
                             return(
-                            
-                                <tr key={user.id} onClick={()=>onUserClick(user.id)}>
-                                    <th scope="row">{user.id}</th>
-                                    <td>{user.name}</td>
-                                    <td>{user.surname}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.active}</td>
+                                <tr key={post.id} onClick={()=>onPostClick(post.id)}>
+                                    <th>{post.id}</th>
+                                    <td>{post.title}</td>
+                                    <td>{post.author}</td>
+                                    <td>{post.category}</td>
+                                    <td>{post.publishedDate}</td>
                                 </tr>
                             )
-                        })*/
-                    }
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    
+                        })
+                    }    
                 </tbody>
             </table>
+            <br/>
+            <br/>
+            <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}/>
         </div>
     )
 }

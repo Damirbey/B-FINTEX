@@ -1,12 +1,12 @@
 import React , {useState} from 'react';
+import AdministratorNavigation from '../AdminNavigation/AdministratorNavigation';
 import {useHistory} from 'react-router-dom';
 import { users } from '../../../data';
 import './Users.css';
 import ReactPaginate from 'react-paginate';
 
 const Users=()=>{
-    const [searchString, setSearchString] = useState('');
-    const history = useHistory();
+    /**React Pagination */
     const [pageNumber, setPageNumber] = useState(0);
     const usersPerPage = 10;
     const pagesVisited = pageNumber * usersPerPage;
@@ -16,18 +16,23 @@ const Users=()=>{
     const changePage = ({selected}) =>{
         setPageNumber(selected);
     }
+    /**Filtering users */
+    const [searchString, setSearchString] = useState('');
     const onInputChange=(event)=>{
         setSearchString(event.target.value);
     }
     const filteredUsers = displayUsers.filter((user)=>{
         return user.name.toLowerCase().includes(searchString.toLowerCase()) || user.surname.toLowerCase().includes(searchString.toLowerCase())
     })
-
+    /**Redirecting to selected users page */
+    const history = useHistory();
     const onUserClick=(userId)=>{
         history.push(`/user/${userId}`);
     }
+
     return(
         <div>
+            <AdministratorNavigation/>
             <input 
             className="form-control mr-sm-2 " 
             type="search" 
@@ -75,8 +80,7 @@ const Users=()=>{
                     previousLinkClassName={"previousBttn"}
                     nextLinkClassName={"nextBttn"}
                     disabledClassName={"paginationDisabled"}
-                    activeClassName={"paginationActive"}
-                    />
+                    activeClassName={"paginationActive"}/>
         </div>
         );
 }
