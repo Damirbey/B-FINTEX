@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { users } from '../../../data';
+import { users } from '../../../../data';
 import './UserProfile.css';
 const UserProfile=(props)=>{
     /**Fetching the selected user */
