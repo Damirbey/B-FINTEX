@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { users } from '../../../../data';
 import './UserProfile.css';
+import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
 const UserProfile=(props)=>{
     /**Fetching the selected user */
     const userId = props.match.params.id;
@@ -173,6 +174,8 @@ const UserProfile=(props)=>{
          }
     }
     return (
+        <div>
+        <AdministratorNavigation/>
         <div className="container-full center"> 
         <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
            <div className="card h-100">
@@ -265,6 +268,7 @@ const UserProfile=(props)=>{
                </div>
            </div>
        </div>
+    </div>
    </div>
     )
 
