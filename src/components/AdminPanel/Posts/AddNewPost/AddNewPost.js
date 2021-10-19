@@ -65,9 +65,17 @@ const AddNewPost = ()=>{
                                         <textarea type="text" className="form-control" id="postContent" rows="10" placeholder="Please insert or type post content here"></textarea>
                                     </div>
                                 </div>
-                                
-
+        
                             </div>
+
+                            <div className="row gutters">
+                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div className="text-right">
+                                        <button type="button" id="submit" name="submit" className="btn btn-primary" > Add Post </button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
