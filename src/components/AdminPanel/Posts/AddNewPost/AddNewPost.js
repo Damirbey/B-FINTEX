@@ -25,7 +25,7 @@ const AddNewPost = ()=>{
         console.log("Category field", event.target.value);
         setCategory(event.target.value);
     }
-
+    
     return(
         <div>
             <AdministratorNavigation/>
