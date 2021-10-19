@@ -1,7 +1,31 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
 
 const AddNewPost = ()=>{
+
+    /**Declaring field variables using hooks to fetch the values entered */
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
+    const [content, setContent] = useState('');
+
+    /** Declaring onChange functions for every field on the form */
+    const onTitleChange = (event)=>{
+        console.log("Title field", event.target.value);
+        setTitle(event.target.value);
+    }
+
+    const onAuthorChange = (event)=>{
+        console.log("Author field", event.target.value);
+        setAuthor(event.target.value);
+    }
+
+    const onCategoryChange = (event)=>{
+        console.log("Category field", event.target.value);
+        setCategory(event.target.value);
+    }
+
     return(
         <div>
             <AdministratorNavigation/>
@@ -29,21 +53,21 @@ const AddNewPost = ()=>{
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group" >
                                         <label for="postTitle">Post Title</label>
-                                        <input type="text" className="form-control" id="postTitle" placeholder="Title"/>
+                                        <input type="text" className="form-control" id="postTitle" placeholder="Title" onChange={onTitleChange}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="author">Author</label>
-                                        <input type="text" className="form-control" id="author" placeholder="Author"/>
+                                        <input type="text" className="form-control" id="author" placeholder="Author" onChange={onAuthorChange}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="category">Post Category</label>
-                                        <select type="text" className="form-control" id="category">
+                                        <select type="text" className="form-control" id="category" onChange={onCategoryChange}>
                                             <option value="">Please select post category</option>
                                             <option value="Main Post">Main Post</option>
                                             <option value="Side Post">Side Post</option>
