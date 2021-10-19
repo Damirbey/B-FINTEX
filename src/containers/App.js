@@ -13,6 +13,7 @@ import AdminPanel from '../components/AdminPanel/AdminPanel';
 import Posts from '../components/AdminPanel/Posts/Posts';
 import UserProfile from '../components/AdminPanel/Users/UserProfile/UserProfile';
 import PostDetail from '../components/AdminPanel/Posts/PostDetail/PostDetail';
+import AddNewPost from '../components/AdminPanel/Posts/AddNewPost/AddNewPost';
 
 const initialState={
   isLoggedIn:false,
@@ -53,8 +54,9 @@ class App extends Component{
               <Route exact path="/user/:id" component={UserProfile}/>
               <Route exact path="/post/:id" component={PostDetail}/>
               <Switch>
-                <Route path="/adminpanel" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <AdminPanel />)} />
-                <Route path="/allposts" render={() => (!isLoggedIn ||user.id!==2 ? <Redirect to="/b-fintex" /> : <Posts />)} />
+                <Route path="/adminpanel" render={() => (isLoggedIn || user.id == 2 ? <AdminPanel /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/allposts" render={() => (isLoggedIn ||user.id == 2 ? <Posts /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/addpost" render={() => (isLoggedIn ||user.id == 2 ?  <AddNewPost /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
                 <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />
               </Switch>
