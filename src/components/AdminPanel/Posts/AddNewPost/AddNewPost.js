@@ -12,20 +12,25 @@ const AddNewPost = ()=>{
 
     /** Declaring onChange functions for every field on the form */
     const onTitleChange = (event)=>{
-        console.log("Title field", event.target.value);
         setTitle(event.target.value);
     }
 
     const onAuthorChange = (event)=>{
-        console.log("Author field", event.target.value);
         setAuthor(event.target.value);
     }
 
     const onCategoryChange = (event)=>{
-        console.log("Category field", event.target.value);
         setCategory(event.target.value);
     }
-    
+
+    const onImageChange = (event)=>{
+        setImage(event.target.value);
+    }
+
+    const onContentChange=(event)=>{
+        setContent(event.target.value);
+    }
+
     return(
         <div>
             <AdministratorNavigation/>
@@ -38,8 +43,8 @@ const AddNewPost = ()=>{
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <h2 className="mb-2 text-primary">Add New Post</h2>
                                 </div>
-                                {/*
-                                    successBox ? 
+                                {
+                                    /*successBox ? 
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 alert alert-success" role="alert">
                                         {displayMessage}
                                     </div>
@@ -79,14 +84,14 @@ const AddNewPost = ()=>{
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="image">Image</label>
-                                        <input type="file" className="form-control-file" id="image" />
+                                        <input type="file" className="form-control-file" id="image" onChange={onImageChange}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="form-group">
                                         <label for="postContent">Content</label>
-                                        <textarea type="text" className="form-control" id="postContent" rows="10" placeholder="Please insert or type post content here"></textarea>
+                                        <textarea type="text" className="form-control" id="postContent" rows="10" placeholder="Please insert or type post content here" onChange={onContentChange}></textarea>
                                     </div>
                                 </div>
         
