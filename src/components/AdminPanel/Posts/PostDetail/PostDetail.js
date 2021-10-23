@@ -1,178 +1,110 @@
 import React ,{useState} from 'react';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
-import { users } from '../../../../data';
 
-const PostDetail=(props)=>{
-    /**Fetching the selected user */
-    const userId = props.match.params.id;
-    const user = users.filter((user)=>{return user.id == userId}); 
-     /**States of the component */
-    const [editableMode,setEditableMode] = useState(false);
-    const [name,setName] = useState(user.name);
-    const [surname,setSurname] = useState(user.surname);
-    const [email,setEmail] = useState(user.email);
-    const [password,setPassword] = useState('');
-    const [confirmPassword,setConfirmPassword] = useState('');
+const PostDetail = ()=>{
+
+    /**Declaring field variables using hooks to fetch the values entered */
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
+    const [content, setContent] = useState('');
+    const [successBox, setSuccessBox] = useState(false);
+    const [errorBox, setErrorBox] = useState(false)
     const [displayMessage, setDisplayMessage] = useState('');
-    const [successBox,setSuccessBox] = useState(false);
-    const [errorBox, setErrorBox] = useState(false);
-    const optionalText={
-         color:"green"
-     }
-     /**Fields variables */
-    const onNameChange=(event)=>{
-         resetField("#name");
-         setName(event.target.value);
+    const [updateBtnAvailable, setUpdateBtn] = useState(false);
+
+    /** Declaring onChange functions for every field on the form */
+    const onTitleChange = (event)=>{
+        setTitle(event.target.value);
+        resetField("#postTitle");
     }
-    const onSurnameChange=(event)=>{
-         resetField("#surname");
-         setSurname(event.target.value);
+
+    const onAuthorChange = (event)=>{
+        setAuthor(event.target.value);
+        resetField("#author");
     }
-    const onEmailChange=(event)=>{
-         resetField("#email");
-         setEmail(event.target.value);
+
+    const onCategoryChange = (event)=>{
+        setCategory(event.target.value);
+        resetField("#category");
     }
-    const onPasswordChange = (event)=>{
-         resetField("#password");
-         setPassword(event.target.value);
+
+    const onImageChange = (event)=>{
+        setImage(event.target.value);
+        resetField("#image")
     }
-    const onConfirmPasswordChange=(event)=>{
-         resetField("#confirmPassword");
-         setConfirmPassword(event.target.value);
+
+    const onContentChange=(event)=>{
+        setContent(event.target.value);
+        resetField("#postContent");
     }
-     /** Cosmetic functions to enable, disable and highlight required fields*/
-    const exitEditableMode=()=>{
-         setEditableMode(false);
-         const numberOfEditableFields = document.querySelectorAll(".editable").length;
-         for(var i = 0;i < numberOfEditableFields;i++)
-         {
-             document.querySelectorAll(".editable")[i].readOnly = true;
-         }
-         resetField("#name");
-         resetField("#surname");
-         resetField("#email");
-    }
-    const enableFields=()=>{
-         setEditableMode(true);
-         const numberOfEditableFields = document.querySelectorAll(".editable").length;
-         for(var i=0;i < numberOfEditableFields; i++)
-         document.querySelectorAll(".editable")[i].readOnly = false;
-    }
+
+    /**Highlight and Reset functions are used to highlight the field when nothing 
+     * is entered and reset the field after the value is entered*/
     const resetField=(id)=>{
-         document.querySelector(id).style.border="";
+        document.querySelector(id).style.border="";
     }
     const highlightField=(id)=>{
-         document.querySelector(id).style.border="1px solid red";
+        document.querySelector(id).style.border="1px solid red";
     }
-     /**Component's fetch function */
-    const requestUpdate = (endpoint)=>{
-         return fetch(endpoint,{
-                     method:'put',
-                     headers:{'Content-Type':'application/json'},
-                     body:JSON.stringify({
-                         id:user.id,
-                         name:name,
-                         surname:surname,
-                         email:email,
-                         password:password
-                         })
-             })
+    const fieldName=(id)=>{
+        return document.querySelector(id).value;
     }
-     /**Submit function of the component */
-    const onUpateSubmit = ()=>{
-        if(name.length > 0 && surname.length > 0 && email.length > 0)
+    /**Enabling all fields when in edit mode; edit button is clicked */
+
+    /**A function that checks if any field is missing the user input  */
+    const allFieldsHaveInput=()=>{
+        var errorCount=0;
+        if(fieldName("#postTitle").length==0)
         {
-             if(password.length > 0 || confirmPassword.length > 0)
-             {
-                 if(password === confirmPassword)
-                 {
-                     /*Submitting the records for update with passwords*/
-                     requestUpdate('https://arctic-eds-99400.herokuapp.com/profileUpdate')
-                     .then(res=>res.json())
-                     .then(response=>{
-                         if(response!=="Something went wrong")
-                         {
-                             setDisplayMessage("Updated Successfully");
-                             setErrorBox(false);
-                             setSuccessBox(true); 
-                             exitEditableMode();
-                             user=response[0];
-                         }
-                         else{
-                             setDisplayMessage("Oops cannot update at the moment");
-                             setErrorBox(true);
-                             setSuccessBox(false); 
-                         }
-                     }) 
-                 }
-                 else
-                 {
-                     setDisplayMessage("Passwords do not match!");
-                     setErrorBox(true);
-                     setSuccessBox(false); 
-                     highlightField("#password");
-                     highlightField("#confirmPassword");
-                 }
-             }
-             /*Submitting the records for update without passwords*/
-             else{
-                 resetField("#password");
-                 resetField("#confirmPassword");
-                 requestUpdate('https://arctic-eds-99400.herokuapp.com/profileUpdate')
-                 .then(res=>res.json())
-                 .then(response=>{
-                     if(response!=="Something went wrong")
-                     {
-                         setDisplayMessage("Updated Successfully");
-                         setErrorBox(false);
-                         setSuccessBox(true); 
-                         exitEditableMode();
-                         user=response[0];
-                     }
-                     else{
-                         setDisplayMessage("Oops cannot update at the moment");
-                         setErrorBox(true);
-                         setSuccessBox(false); 
-                     }
-                 })  
-             }
+            highlightField("#postTitle");
+            errorCount++;
         }
-        else
+        if(fieldName("#author").length==0){
+            highlightField("#author");
+            errorCount++;
+        }
+        if(fieldName("#category").length==0){
+            highlightField("#category");
+            errorCount++;
+        }
+        if(fieldName("#image").length==0){
+            highlightField("#image");
+            errorCount++;
+        }
+        if(fieldName("#postContent").length==0){
+            highlightField("#postContent");
+            errorCount++;
+        }
+
+        if(errorCount>0)
         {
-            
-            setDisplayMessage("Please fill in all required fields");
+            return false;
+        }else{
+            return true;
+        }
+    }
+    /**Submitting the post */
+    const onUpdateClicked=()=>{
+        if(allFieldsHaveInput())
+        {
+            setSuccessBox(true);
+            setErrorBox(false);
+            setDisplayMessage('Post updated successfully');
+            setUpdateBtn(false);
+        }else{
             setErrorBox(true);
-            setSuccessBox(false); 
-            highlightField("#name");
-            highlightField("#surname");
-            highlightField("#email");
+            setSuccessBox(false);
+            setDisplayMessage('Please fill in all the fields');
         }
     }
-     /***Deleting the user*/
-    const onDeleteSubmit=()=>{
-         var answer = window.confirm("Are you sure to delete the current user?");
-         if(answer)
-         {
-             fetch('https://arctic-eds-99400.herokuapp.com/deleteUser',{
-                 method:"delete",
-                 headers:{"Content-Type":"Application/json"},
-                 body:JSON.stringify({
-                     id:user.id
-                 })
-             })
-             .then(res=>res.json())
-             .then(response=>{
-                 if(response!=="Can not delete user at the moment")
-                 {
-                     alert("User Deleted Successfully");
-                     //onRouteChange("home");
-                 }
-                 else{
-                     alert("Can not delete user at the moment");
-                 }
-             })
-         }
+    /**Enabling the update button when the edit button is clicked */
+    const onEditClick = ()=>{
+        setUpdateBtn(true);
+        enableFields();
     }
+
     return(
         <div>
             <AdministratorNavigation/>
@@ -181,6 +113,7 @@ const PostDetail=(props)=>{
                     <div className="card h-100"> 
                         <div className="card-body">
                             <div className="row gutters">
+
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <h2 className="mb-2 text-primary">Post Details</h2>
                                 </div>
@@ -195,63 +128,68 @@ const PostDetail=(props)=>{
                                     </div>
                                     : ""
                                 }
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group" >
-                                        <label for="name">Name</label>
-                                        <input type="text" className="form-control editable" id="name"  onChange={onNameChange} readOnly/>
+                                        <label for="postTitle">Post Title</label>
+                                        <input type="text" className="form-control editable" id="postTitle" placeholder="Title" onChange={onTitleChange} readOnly/>
                                     </div>
                                 </div>
+
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="surname">Surname</label>
-                                        <input type="text" className="form-control editable" id="surname" placeholder="Enter your surname" onChange={onSurnameChange} readOnly/>
+                                        <label for="author">Author</label>
+                                        <input type="text" className="form-control editable" id="author" placeholder="Author" onChange={onAuthorChange} readOnly/>
                                     </div>
                                 </div>
+
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" className="form-control editable" id="email" placeholder="Enter email ID"  onChange={onEmailChange} readOnly/>
+                                        <label for="category">Post Category</label>
+                                        <select type="text" className="form-control editable" id="category" onChange={onCategoryChange} readOnly>
+                                            <option value="">Please select post category</option>
+                                            <option value="Main Post">Main Post</option>
+                                            <option value="Side Post">Side Post</option>
+                                            <option value="Bottom Post">Bottom Post</option>
+                                        </select>
                                     </div>
                                 </div>
+
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="status">Active</label>
-                                        <input type="text" className="form-control" id="status" placeholder="Current Status"  readOnly/>
+                                        <label for="image">Image</label>
+                                        <input type="file" className="form-control-file" id="image" onChange={onImageChange}/>
                                     </div>
                                 </div>
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="form-group">
-                                        <label for="dateJoined">Date Joined </label>
-                                        <input type="text" className="form-control" id="dateJoined"  disabled/>
+                                        <label for="postContent">Content</label>
+                                        <textarea type="text" className="form-control editable" id="postContent" rows="10" placeholder="Please insert or type post content here" onChange={onContentChange} readOnly></textarea>
                                     </div>
                                 </div>
+        
                             </div>
+
                             <div className="row gutters">
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="text-right">
                                         {
-                                            editableMode &&
-                                            <button type="button" id="submit" name="submit" className="btn btn-secondary ma2" onClick={exitEditableMode}>Cancel</button> 
+                                            updateBtnAvailable ? 
+                                            <button type="button" id="submit" name="submit" className="btn btn-primary" onClick={onUpdateClicked}> Update Post </button>
+                                            :
+                                            <button type="button" id="submit" name="submit" className="btn btn-secondary" onClick={onEditClick}> Edit Post </button>
                                         }
-                                        <button type="button" 
-                                            id="submit" 
-                                            name="submit" 
-                                            className="btn btn-primary" 
-                                            onClick={editableMode ? onUpateSubmit : enableFields}> {editableMode?'Update':'Edit'} </button>
-
-                                        <button type="button" 
-                                            id="submit" 
-                                            name="submit" 
-                                            className="btn btn-danger ma2" 
-                                            onClick={onDeleteSubmit}> Delete </button>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     )
 }
 
