@@ -1,7 +1,8 @@
-import React ,{useState} from 'react';
+import React ,{useState, useEffect} from 'react';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
+import { posts } from '../../../../data';
 
-const PostDetail = ()=>{
+const PostDetail = (props)=>{
 
     /**Declaring field variables using hooks to fetch the values entered */
     const [title, setTitle] = useState('');
@@ -13,6 +14,16 @@ const PostDetail = ()=>{
     const [errorBox, setErrorBox] = useState(false)
     const [displayMessage, setDisplayMessage] = useState('');
     const [updateBtnAvailable, setUpdateBtn] = useState(false);
+    const [receivedPost,setReceivedPost] = useState('');
+    var post;
+    /**Fetching the selected post from the server */
+    useEffect(()=>{
+         post = posts.filter((post)=>{
+            return post.id === props.match.params.id;
+        })
+        setReceivedPost(post[0]);
+    },[])
+    console.log(post);
 
     /** Declaring onChange functions for every field on the form */
     const onTitleChange = (event)=>{
@@ -52,7 +63,13 @@ const PostDetail = ()=>{
         return document.querySelector(id).value;
     }
     /**Enabling all fields when in edit mode; edit button is clicked */
-
+    const enableFields=()=>{
+        var numberOfEditableFields = document.querySelectorAll(".editable").length;
+        for(var i = 0; i < numberOfEditableFields; i++){
+            document.querySelectorAll(".editable")[i].readOnly = false;
+        }
+        document.querySelector(".editableCategory").disabled = false;
+    }
     /**A function that checks if any field is missing the user input  */
     const allFieldsHaveInput=()=>{
         var errorCount=0;
@@ -85,7 +102,7 @@ const PostDetail = ()=>{
             return true;
         }
     }
-    /**Submitting the post */
+    /**Updating the post */
     const onUpdateClicked=()=>{
         if(allFieldsHaveInput())
         {
@@ -131,22 +148,22 @@ const PostDetail = ()=>{
 
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group" >
-                                        <label for="postTitle">Post Title</label>
-                                        <input type="text" className="form-control editable" id="postTitle" placeholder="Title" onChange={onTitleChange} readOnly/>
+                                        <label htmlFor="postTitle">Post Title</label>
+                                        <input type="text" className="form-control editable" id="postTitle" placeholder="Title" onChange={onTitleChange} readOnly value={receivedPost.title}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="author">Author</label>
+                                        <label htmlFor="author">Author</label>
                                         <input type="text" className="form-control editable" id="author" placeholder="Author" onChange={onAuthorChange} readOnly/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="category">Post Category</label>
-                                        <select type="text" className="form-control editable" id="category" onChange={onCategoryChange} readOnly>
+                                        <label htmlFor="category">Post Category</label>
+                                        <select type="text" className="form-control editableCategory" id="category" onChange={onCategoryChange} disabled>
                                             <option value="">Please select post category</option>
                                             <option value="Main Post">Main Post</option>
                                             <option value="Side Post">Side Post</option>
@@ -157,14 +174,14 @@ const PostDetail = ()=>{
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
-                                        <label for="image">Image</label>
+                                        <label htmlFor="image">Image</label>
                                         <input type="file" className="form-control-file" id="image" onChange={onImageChange}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="form-group">
-                                        <label for="postContent">Content</label>
+                                        <label htmlFor="postContent">Content</label>
                                         <textarea type="text" className="form-control editable" id="postContent" rows="10" placeholder="Please insert or type post content here" onChange={onContentChange} readOnly></textarea>
                                     </div>
                                 </div>
