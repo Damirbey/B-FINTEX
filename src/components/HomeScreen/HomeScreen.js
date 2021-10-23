@@ -8,7 +8,7 @@ import {posts} from '../../data';
 function HomeScreen()
 {
     const mainPost = posts.filter((post)=>{
-        return post.category === 'Main';
+        return post.category === 'Main Post';
     })
     const sidePosts = posts.filter((post)=>{
         return post.category === 'Side Post'

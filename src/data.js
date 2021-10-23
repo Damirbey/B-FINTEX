@@ -5,7 +5,7 @@ const posts = [
         content : "Choosing an insurance policy is one of the most complicated financial decisions a person can make. Jakarta-based Lifepal wants to simplify the process for Indonesians with a marketplace that lets users compare policies from more than 50 providers, get help from licensed agents and file claims. The startup, which says it is the country’s largest direct-to-consumer insurance marketplace, announced today it has raised a $9 million Series A. The round was led by ProBatus Capital, a venture firm backed by Prudential Financial, with participation from Cathay Innovation and returning investors Insignia Venture Partners, ATM Capital and Hustle Fund.",
         author : "Ronak Maru",
         publishedDate : "August 15,2021",
-        category:"Main",
+        category:"Main Post",
         image : "/images/news/adobe.png"
     },
     {

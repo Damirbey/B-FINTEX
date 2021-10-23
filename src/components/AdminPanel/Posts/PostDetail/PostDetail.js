@@ -13,17 +13,11 @@ const PostDetail = (props)=>{
     const [successBox, setSuccessBox] = useState(false);
     const [errorBox, setErrorBox] = useState(false)
     const [displayMessage, setDisplayMessage] = useState('');
-    const [updateBtnAvailable, setUpdateBtn] = useState(false);
-    const [receivedPost,setReceivedPost] = useState('');
-    var post;
+    const [editMode, setEditMode] = useState(false);
+     
     /**Fetching the selected post from the server */
-    useEffect(()=>{
-         post = posts.filter((post)=>{
-            return post.id === props.match.params.id;
-        })
-        setReceivedPost(post[0]);
-    },[])
-    console.log(post);
+    var receivedPost = posts.filter((post)=>{
+        return post.id === props.match.params.id;})
 
     /** Declaring onChange functions for every field on the form */
     const onTitleChange = (event)=>{
@@ -70,6 +64,13 @@ const PostDetail = (props)=>{
         }
         document.querySelector(".editableCategory").disabled = false;
     }
+    const disableFields=()=>{
+        var numberOfEditableFields = document.querySelectorAll(".editable").length;
+        for(var i = 0; i < numberOfEditableFields; i++){
+            document.querySelectorAll(".editable")[i].readOnly = true;
+        }
+        document.querySelector(".editableCategory").disabled = true;
+    }
     /**A function that checks if any field is missing the user input  */
     const allFieldsHaveInput=()=>{
         var errorCount=0;
@@ -109,7 +110,9 @@ const PostDetail = (props)=>{
             setSuccessBox(true);
             setErrorBox(false);
             setDisplayMessage('Post updated successfully');
-            setUpdateBtn(false);
+            setEditMode(false);
+            disableFields();
+
         }else{
             setErrorBox(true);
             setSuccessBox(false);
@@ -118,7 +121,7 @@ const PostDetail = (props)=>{
     }
     /**Enabling the update button when the edit button is clicked */
     const onEditClick = ()=>{
-        setUpdateBtn(true);
+        setEditMode(true);
         enableFields();
     }
 
@@ -149,14 +152,14 @@ const PostDetail = (props)=>{
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group" >
                                         <label htmlFor="postTitle">Post Title</label>
-                                        <input type="text" className="form-control editable" id="postTitle" placeholder="Title" onChange={onTitleChange} readOnly value={receivedPost.title}/>
+                                        <input type="text" className="form-control editable" id="postTitle" placeholder="Title" onChange={onTitleChange} readOnly value={receivedPost[0].title}/>
                                     </div>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label htmlFor="author">Author</label>
-                                        <input type="text" className="form-control editable" id="author" placeholder="Author" onChange={onAuthorChange} readOnly/>
+                                        <input type="text" className="form-control editable" id="author" placeholder="Author" onChange={onAuthorChange} readOnly value={receivedPost[0].author}/>
                                     </div>
                                 </div>
 
@@ -165,9 +168,21 @@ const PostDetail = (props)=>{
                                         <label htmlFor="category">Post Category</label>
                                         <select type="text" className="form-control editableCategory" id="category" onChange={onCategoryChange} disabled>
                                             <option value="">Please select post category</option>
-                                            <option value="Main Post">Main Post</option>
-                                            <option value="Side Post">Side Post</option>
-                                            <option value="Bottom Post">Bottom Post</option>
+                                            {receivedPost[0].category=="Main Post"?  
+                                                <option value="Main Post" selected>Main Post</option> 
+                                                :
+                                                <option value="Main Post">Main Post</option>
+                                            }
+                                            {receivedPost[0].category=="Side Post"?  
+                                                <option value="Side Post" selected>Side Post</option> 
+                                                :
+                                                <option value="Side Post">Side Post</option>
+                                            }
+                                            {receivedPost[0].category=="Bottom Post"?  
+                                                <option value="Bottom Post" selected>Bottom Post</option> 
+                                                :
+                                                <option value="Bottom Post">Bottom Post</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -182,7 +197,7 @@ const PostDetail = (props)=>{
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="form-group">
                                         <label htmlFor="postContent">Content</label>
-                                        <textarea type="text" className="form-control editable" id="postContent" rows="10" placeholder="Please insert or type post content here" onChange={onContentChange} readOnly></textarea>
+                                        <textarea type="text" className="form-control editable" id="postContent" rows="10" placeholder="Please insert or type post content here" onChange={onContentChange} readOnly value={receivedPost[0].content}></textarea>
                                     </div>
                                 </div>
         
@@ -192,7 +207,7 @@ const PostDetail = (props)=>{
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div className="text-right">
                                         {
-                                            updateBtnAvailable ? 
+                                            editMode ? 
                                             <button type="button" id="submit" name="submit" className="btn btn-primary" onClick={onUpdateClicked}> Update Post </button>
                                             :
                                             <button type="button" id="submit" name="submit" className="btn btn-secondary" onClick={onEditClick}> Edit Post </button>
