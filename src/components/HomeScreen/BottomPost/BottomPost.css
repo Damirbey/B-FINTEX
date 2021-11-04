@@ -71,6 +71,7 @@
     padding:20px;
     margin:0 auto;
     margin-bottom:20px;
+    cursor: pointer;
 }
 a{
     color:white !important

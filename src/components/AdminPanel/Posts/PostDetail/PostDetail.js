@@ -1,7 +1,6 @@
 import React ,{useState, useEffect} from 'react';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
 import { posts } from '../../../../data';
-
 const PostDetail = (props)=>{
 
     /**Declaring field variables using hooks to fetch the values entered */
@@ -124,7 +123,7 @@ const PostDetail = (props)=>{
         setEditMode(true);
         enableFields();
     }
-
+    console.log(receivedPost[0].image)
     return(
         <div>
             <AdministratorNavigation/>
@@ -196,10 +195,7 @@ const PostDetail = (props)=>{
                                                 <input type="file" className="form-control-file" id="image" onChange={onImageChange}/>
                                             </React.Fragment>
                                             :
-                                            <React.Fragment>
                                                 <img src={receivedPost[0].image} alt="post image"/>
-                                            </React.Fragment>
-                                            
                                         }
                                         
                                     </div>
