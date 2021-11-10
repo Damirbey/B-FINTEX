@@ -5,8 +5,8 @@ import {users} from '../../data';
 import './SignIn.css';
 
 const SignIn = ({changeIsLoggedInState,changeUserState})=>{
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
+        const [signInEmail, setEmail] = useState('');
+        const [signInPassword, setPassword] = useState('');
         const history = useHistory();
                 
         const onEmailChange=(event)=>{
@@ -21,12 +21,22 @@ const SignIn = ({changeIsLoggedInState,changeUserState})=>{
             document.querySelectorAll("input")[1].style.border="1px solid red";
         }
         const onButtonClick = (event)=>{
-            if(email.length === 0 || password.length === 0)
+            if(signInEmail.length === 0 || signInPassword.length === 0)
             {
                 alert("Please fill in all the fields");
                 highlightAllFieldsRed();
             }
             else{
+                fetch('http://localhost:3000/signIn',{
+                    method:'post',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({
+                        email:signInEmail,
+                        password:signInPassword
+                    })
+                }).then(response=>response.json())
+                .then(receivedData=>console.log(receivedData))
+                
                 /*let foundUser = users.filter((user)=>{
                     return user.email === email && user.password === password;
                 });

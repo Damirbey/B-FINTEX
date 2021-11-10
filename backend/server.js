@@ -11,7 +11,7 @@ app.post("/signIn", (req,res)=>{
     const {email, password} = req.body;
     console.log("Email is "+email);
     console.log("Password is "+password);
-    res.send("Server is running");
+    res.json("Server is running");
 })
 
 app.listen(PORT,function(){
