@@ -27,7 +27,7 @@ const SignIn = ({changeIsLoggedInState,changeUserState})=>{
                 highlightAllFieldsRed();
             }
             else{
-                let foundUser = users.filter((user)=>{
+                /*let foundUser = users.filter((user)=>{
                     return user.email === email && user.password === password;
                 });
                 if(foundUser.length>0)
@@ -38,7 +38,7 @@ const SignIn = ({changeIsLoggedInState,changeUserState})=>{
                 }
                 else{
                     alert("Wrong credentials, please try again or register");
-                }
+                }*/
             }
         }
 
