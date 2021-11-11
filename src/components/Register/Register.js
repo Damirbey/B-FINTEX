@@ -6,8 +6,8 @@ import './Register.css';
 const Register=({changeUserState,changeIsLoggedInState})=>{
     const [firstName, setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [registerEmail,setEmail] = useState('');
+    const [registerPassword, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const history = useHistory();
 
@@ -39,37 +39,22 @@ const Register=({changeUserState,changeIsLoggedInState})=>{
         document.querySelectorAll("input")[4].style.border="1px solid red"; 
     }
     const onButtonClick = (event)=>{
-        if(firstName.length > 0 && lastName.length > 0 && email.length > 0 && password.length > 0 && confirmPassword.length > 0){
-            if(email.includes("@"))
+        if(firstName.length > 0 && lastName.length > 0 && registerEmail.length > 0 && registerPassword.length > 0 && confirmPassword.length > 0){
+            if(registerEmail.includes("@"))
             {
-                if(password === confirmPassword)
+                if(registerPassword === confirmPassword)
                 {
-                    var foundUser = users.filter((user)=>{return user.email === email});
-                    if(foundUser.length>0)
-                    {
-                        alert("User already exist in the system, please use other credentials"+foundUser);
-                        console.log(foundUser);
-                    }
-                    else
-                    {
-                        const newUser = {
-                            id:users.length+1,
+                    fetch('http://localhost:3000/register',{
+                        method:'post',
+                        headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({
+                            email:registerEmail,
                             name:firstName,
                             surname:lastName,
-                            password:password,
-                            email:email
-                        }
-                        if(users.push(newUser)){
-                            alert("User registered successfully");
-                            changeIsLoggedInState();
-                            changeUserState(newUser);
-                            history.push('/b-fintex');
-                        }
-                        else
-                        {
-                            alert("Can not register user at the moment");
-                        }
-                    }
+                            password:registerPassword
+                        })
+                    }).then(response=>response.json())
+                    .then((receivedData)=>{alert(receivedData)});
                 }
                 else{
                     alert("Passwords do not match");
