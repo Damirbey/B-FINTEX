@@ -28,12 +28,11 @@ app.post("/signIn", (req,res)=>{
 /**Register request */
 app.post("/register",(req,res)=>{
     const {email,name,surname,password} = req.body;
-    console.log("Register email "+email);
-    console.log("Register name "+name);
-    console.log("Register surname "+surname);
-    console.log("Register password "+password);
-    db.any("INSERT INTO users (name,surname,email,hash,joined,active) VALUES ($1,$2,$3,$4,$5,$6)",[name,surname,email,password,new Date(),1]).then(response=>console.log(response)).catch(err=>console.log(err));
-    res.json("Registration is successful");
+    db.any("INSERT INTO users (name,surname,email,hash,joined,active) VALUES ($1,$2,$3,$4,$5,$6)",[name,surname,email,password,new Date(),1])
+    .then(response=>{
+        db.any("SELECT * FROM users WHERE email = $1",[email])
+        .then(user=>res.json(user));
+    }).catch(err=>res.status(400).json("Ooops something went wrong"));
 })
 
 app.listen(PORT,function(){
