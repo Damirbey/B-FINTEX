@@ -43,6 +43,7 @@ class App extends Component{
   {
     const {isLoggedIn,user} = this.state;
     return(
+      
       <React.Fragment>
         <BrowserRouter>
           <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
@@ -54,9 +55,9 @@ class App extends Component{
               <Route exact path="/user/:id" component={UserProfile}/>
               <Route exact path="/post/:id" component={PostDetail}/>
               <Switch>
-                <Route path="/adminpanel" render={() => (isLoggedIn || user.id == 2 ? <AdminPanel /> : <Redirect to="/b-fintex" />)} />
-                <Route path="/allposts" render={() => (isLoggedIn ||user.id == 2 ? <Posts /> : <Redirect to="/b-fintex" />)} />
-                <Route path="/addpost" render={() => (isLoggedIn ||user.id == 2 ?  <AddNewPost /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/adminpanel" render={() => (isLoggedIn ||user.id == 1 ? <AdminPanel /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/allposts" render={() => (isLoggedIn ||user.id == 1 ? <Posts /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/addpost" render={() => (isLoggedIn ||user.id == 1 ?  <AddNewPost /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />
                 <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <Register changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn} />)} />
               </Switch>

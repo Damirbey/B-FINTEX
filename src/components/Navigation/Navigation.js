@@ -27,7 +27,7 @@ function Navigation({isLoggedIn,user,logOut}){
                         </Link>
                     </li> 
                     {
-                        user.id===2 && isLoggedIn&& 
+                        user.id===1 && isLoggedIn&& 
                         <li class="nav-item">
                         <Link to="/adminpanel">
                             <a class="nav-link">Admin Panel</a>

@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
-import {users} from '../../data';
 import './Register.css';
 
 const Register=({changeUserState,changeIsLoggedInState})=>{
@@ -38,6 +37,7 @@ const Register=({changeUserState,changeIsLoggedInState})=>{
         document.querySelectorAll("input")[3].style.border="1px solid red";
         document.querySelectorAll("input")[4].style.border="1px solid red"; 
     }
+    /**Registering user in the system */
     const onButtonClick = (event)=>{
         if(firstName.length > 0 && lastName.length > 0 && registerEmail.length > 0 && registerPassword.length > 0 && confirmPassword.length > 0){
             if(registerEmail.includes("@"))
@@ -60,6 +60,9 @@ const Register=({changeUserState,changeIsLoggedInState})=>{
                             changeIsLoggedInState();
                             changeUserState(receivedData[0]);
                             history.push('/b-fintex');
+                        }
+                        else{
+                            alert("Unfortunately, we can not register you at the moment");
                         }
                     });
                 }
