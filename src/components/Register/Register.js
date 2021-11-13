@@ -54,7 +54,14 @@ const Register=({changeUserState,changeIsLoggedInState})=>{
                             password:registerPassword
                         })
                     }).then(response=>response.json())
-                    .then((receivedData)=>{alert(receivedData)});
+                    .then((receivedData)=>{
+                        if(receivedData!=="Ooops something went wrong")
+                        {
+                            changeIsLoggedInState();
+                            changeUserState(receivedData[0]);
+                            history.push('/b-fintex');
+                        }
+                    });
                 }
                 else{
                     alert("Passwords do not match");
