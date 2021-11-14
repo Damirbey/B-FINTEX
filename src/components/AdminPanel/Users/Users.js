@@ -1,7 +1,6 @@
-import React , {useState} from 'react';
+import React , {useEffect, useState} from 'react';
 import AdministratorNavigation from '../AdminNavigation/AdministratorNavigation';
 import {useHistory} from 'react-router-dom';
-import { users } from '../../../data';
 import './Users.css';
 import ReactPaginate from 'react-paginate';
 
@@ -10,7 +9,17 @@ const Users=()=>{
     const [pageNumber, setPageNumber] = useState(0);
     const usersPerPage = 10;
     const pagesVisited = pageNumber * usersPerPage;
+    const [users,setUsers] = useState([]);
 
+    /**Fetching all Users */
+    useEffect(()=>{
+        fetch("http://localhost:3000/getAllUsers",{
+            method:'get',
+            headers:{'Content-Type':'application/json'},
+        }).then(response=>response.json())
+        .then(receivedUsers=>setUsers(receivedUsers));
+    },[]);
+    /**Filtering all users based on the search requests */ 
     const displayUsers = users.slice(pagesVisited,usersPerPage + pagesVisited);
     const pageCount = Math.ceil(users.length/usersPerPage);
     const changePage = ({selected}) =>{
@@ -29,7 +38,7 @@ const Users=()=>{
     const onUserClick=(userId)=>{
         history.push(`/user/${userId}`);
     }
-
+     
     return(
         <div>
             <AdministratorNavigation/>
@@ -55,13 +64,12 @@ const Users=()=>{
                     {
                         filteredUsers.map((user)=>{
                             return(
-                            
                                 <tr key={user.id} onClick={()=>onUserClick(user.id)}>
                                     <th scope="row">{user.id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.surname}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.active}</td>
+                                    <td>{user.active == 1 ? "Yes":"No"}</td>
                                 </tr>
                             )
                         })

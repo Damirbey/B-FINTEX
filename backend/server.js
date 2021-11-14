@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const pgp = require('pg-promise')();
 const PORT = process.env.PORT || 3000;
+const signIn = require('./controllers/signIn');
+const register = require('./controllers/register');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -20,45 +22,23 @@ const connectionString = {
 const db = pgp(connectionString);
 
 /**Sign In request */
-app.post("/signIn", (req,res)=>{
-    const {email, password} = req.body;
-    db.any("SELECT * FROM users WHERE email = $1",[email])
-    .then(response=>{
-        if(response.length==1)
-        {
-            const isValid = bcrypt.compareSync(password,response[0].hash);
-            if(isValid){
-                res.json(response);
-            }else{
-                res.status(400).json("User not found!");
-            }
-            
-        }
-        else{
-            res.status(400).json("User not found!");
-        }
-    })
-})
-/**Register request */
-app.post("/register",(req,res)=>{
-    const {email,name,surname,password} = req.body;
-    const saltRounds = 10;
-    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+app.post("/signIn", signIn.performSignIn(db,bcrypt));
 
-    db.any("SELECT * FROM users WHERE email = $1",[email])
-    .then(result=>{
-        if(result.length==1)
-        {
-            res.status(400).json("Ooops something went wrong");
-        }
-        else{
-            db.any("INSERT INTO users (name,surname,email,hash,joined,active) VALUES ($1,$2,$3,$4,$5,$6)",[name,surname,email,hashedPassword,new Date(),1])
-            .then(response=>{
-                db.any("SELECT * FROM users WHERE email = $1",[email])
-                .then(user=>res.json(user));
-            }).catch(err=>res.status(400).json("Ooops something went wrong"));
-        }
-    }) 
+/**Register request */
+app.post("/register",register.registerNewUser(db,bcrypt));
+
+/**Fetching all users */
+app.get("/getAllUsers",(req,res)=>{
+    db.any("SELECT * FROM users WHERE id != 1")
+    .then(allUsers=>res.json(allUsers))
+    .catch(err=>res.status(400).json("Ooops something wrong"));
+})
+/**Fetching information of the selected user */
+app.get("/getUser",(req,res)=>{
+    const {userId} = req.body;
+    db.any("SELECT * FROM users WHERE id = $1",[userId])
+    .then(user=>res.json(user[0]))
+    .catch(err=>res.status(400).json("Oops something wrong"));
 })
 
 app.listen(PORT,function(){
