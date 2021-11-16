@@ -1,21 +1,30 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { users } from '../../../../data';
 import './UserProfile.css';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
 const UserProfile=(props)=>{
     /**Fetching the selected user */
-    const userId = props.match.params.id;
-    const user = users.filter((user)=>{return user.id == userId}); 
+    const id = props.match.params.id;
+
+    useEffect(()=>{
+        fetch('http://localhost:3000/getUser?userId='+id+'',{
+            method:'get',
+            headers:{'Content-Type':'application/json'}
+        }).then(response=>response.json())
+        .then(receivedUser=>setUser(receivedUser))
+    },[])
+
      /**States of the component */
     const [editableMode,setEditableMode] = useState(false);
-    const [name,setName] = useState(user.name);
-    const [surname,setSurname] = useState(user.surname);
-    const [email,setEmail] = useState(user.email);
+    const [name,setName] = useState('');
+    const [surname,setSurname] = useState('');
+    const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     const [displayMessage, setDisplayMessage] = useState('');
     const [successBox,setSuccessBox] = useState(false);
     const [errorBox, setErrorBox] = useState(false);
+    const [user,setUser]=useState([]);
     const optionalText={
          color:"green"
      }
@@ -199,25 +208,25 @@ const UserProfile=(props)=>{
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group" >
                                <label for="name">Name</label>
-                               <input type="text" className="form-control editable" id="name" defaultValue={user[0].name} onChange={onNameChange} readOnly/>
+                               <input type="text" className="form-control editable" id="name" defaultValue={user.name} onChange={onNameChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="surname">Surname</label>
-                               <input type="text" className="form-control editable" id="surname" placeholder="Enter your surname" defaultValue={user[0].surname} onChange={onSurnameChange} readOnly/>
+                               <input type="text" className="form-control editable" id="surname" placeholder="Enter your surname" defaultValue={user.surname} onChange={onSurnameChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="email">Email</label>
-                               <input type="email" className="form-control editable" id="email" placeholder="Enter email ID" defaultValue={user[0].email} onChange={onEmailChange} readOnly/>
+                               <input type="email" className="form-control editable" id="email" placeholder="Enter email ID" defaultValue={user.email} onChange={onEmailChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="status">Active</label>
-                               <input type="text" className="form-control" id="status" placeholder="Current Status" defaultValue={user[0].active} readOnly/>
+                               <input type="text" className="form-control" id="status" placeholder="Current Status" defaultValue={user.active == 1 ? 'No' :'Yes'} readOnly/>
                            </div>
                        </div>
                        {
@@ -240,7 +249,7 @@ const UserProfile=(props)=>{
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="dateJoined">Date Joined </label>
-                               <input type="text" className="form-control" id="dateJoined" value={user[0].joinedDate} disabled/>
+                               <input type="text" className="form-control" id="dateJoined" value={user.joined} disabled/>
                            </div>
                        </div>
                    </div>

@@ -35,7 +35,7 @@ app.get("/getAllUsers",(req,res)=>{
 })
 /**Fetching information of the selected user */
 app.get("/getUser",(req,res)=>{
-    const {userId} = req.body;
+    const userId = req.query.userId;
     db.any("SELECT * FROM users WHERE id = $1",[userId])
     .then(user=>res.json(user[0]))
     .catch(err=>res.status(400).json("Oops something wrong"));

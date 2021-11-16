@@ -19,6 +19,7 @@ const Users=()=>{
         }).then(response=>response.json())
         .then(receivedUsers=>setUsers(receivedUsers));
     },[]);
+    
     /**Filtering all users based on the search requests */ 
     const displayUsers = users.slice(pagesVisited,usersPerPage + pagesVisited);
     const pageCount = Math.ceil(users.length/usersPerPage);
