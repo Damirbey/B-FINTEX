@@ -7,6 +7,7 @@ const pgp = require('pg-promise')();
 const PORT = process.env.PORT || 3000;
 const signIn = require('./controllers/signIn');
 const register = require('./controllers/register');
+const users = require('./controllers/users');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -28,18 +29,14 @@ app.post("/signIn", signIn.performSignIn(db,bcrypt));
 app.post("/register",register.registerNewUser(db,bcrypt));
 
 /**Fetching all users */
-app.get("/getAllUsers",(req,res)=>{
-    db.any("SELECT * FROM users WHERE id != 1")
-    .then(allUsers=>res.json(allUsers))
-    .catch(err=>res.status(400).json("Ooops something wrong"));
-})
+app.get("/getAllUsers",users.getAllUsers(db));
+
 /**Fetching information of the selected user */
-app.get("/getUser",(req,res)=>{
-    const userId = req.query.userId;
-    db.any("SELECT * FROM users WHERE id = $1",[userId])
-    .then(user=>res.json(user[0]))
-    .catch(err=>res.status(400).json("Oops something wrong"));
-})
+app.get("/getUser",users.getSingleUser(db));
+
+/**Updating user information */
+app.put("/updateUser",users.updateUser(db));
+
 
 app.listen(PORT,function(){
     console.log("Application is running on port "+ PORT);

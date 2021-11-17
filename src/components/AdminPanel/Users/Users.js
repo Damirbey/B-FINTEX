@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import './Users.css';
 import ReactPaginate from 'react-paginate';
 
-const Users=()=>{
+const Users=({updateUser})=>{
     /**React Pagination */
     const [pageNumber, setPageNumber] = useState(0);
     const usersPerPage = 10;
@@ -19,7 +19,7 @@ const Users=()=>{
         }).then(response=>response.json())
         .then(receivedUsers=>setUsers(receivedUsers));
     },[]);
-    
+
     /**Filtering all users based on the search requests */ 
     const displayUsers = users.slice(pagesVisited,usersPerPage + pagesVisited);
     const pageCount = Math.ceil(users.length/usersPerPage);
@@ -36,7 +36,8 @@ const Users=()=>{
     })
     /**Redirecting to selected users page */
     const history = useHistory();
-    const onUserClick=(userId)=>{
+    const onUserClick=(userId,user)=>{
+        updateUser(user);
         history.push(`/user/${userId}`);
     }
      
@@ -65,7 +66,7 @@ const Users=()=>{
                     {
                         filteredUsers.map((user)=>{
                             return(
-                                <tr key={user.id} onClick={()=>onUserClick(user.id)}>
+                                <tr key={user.id} onClick={()=>onUserClick(user.id,user)}>
                                     <th scope="row">{user.id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.surname}</td>

@@ -3,11 +3,11 @@ import Users from './Users/Users';
 import './AdminPanel.css';
 import {Link} from 'react-router-dom';
 
-const AdminPanel = ()=>{
+const AdminPanel = ({updateUser})=>{
 
     return(
        <div>
-           <Users/>
+           <Users updateUser={updateUser}/>
        </div>
     )
 }

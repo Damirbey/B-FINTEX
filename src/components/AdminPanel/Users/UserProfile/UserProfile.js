@@ -5,16 +5,7 @@ import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigati
 const UserProfile=(props)=>{
     /**Fetching the selected user */
     const id = props.match.params.id;
-
-    useEffect(()=>{
-        fetch('http://localhost:3000/getUser?userId='+id+'',{
-            method:'get',
-            headers:{'Content-Type':'application/json'}
-        }).then(response=>response.json())
-        .then(receivedUser=>setUser(receivedUser))
-    },[])
-
-     /**States of the component */
+    /**States of the component */
     const [editableMode,setEditableMode] = useState(false);
     const [name,setName] = useState('');
     const [surname,setSurname] = useState('');
@@ -24,7 +15,16 @@ const UserProfile=(props)=>{
     const [displayMessage, setDisplayMessage] = useState('');
     const [successBox,setSuccessBox] = useState(false);
     const [errorBox, setErrorBox] = useState(false);
-    const [user,setUser]=useState([]);
+    const [user,setUser]=useState('');
+
+    useEffect(()=>{
+        fetch('http://localhost:3000/getUser?userId='+id+'',{
+            method:'get',
+            headers:{'Content-Type':'application/json'}
+        }).then(response=>response.json())
+        .then(receivedUser=>{setUser(receivedUser); setName(receivedUser.name)})
+    },[])
+
     const optionalText={
          color:"green"
      }
@@ -96,7 +96,7 @@ const UserProfile=(props)=>{
                  if(password === confirmPassword)
                  {
                      /*Submitting the records for update with passwords*/
-                     requestUpdate('https://arctic-eds-99400.herokuapp.com/profileUpdate')
+                     requestUpdate('http://localhost:3000/updateUser')
                      .then(res=>res.json())
                      .then(response=>{
                          if(response!=="Something went wrong")
@@ -127,7 +127,7 @@ const UserProfile=(props)=>{
              else{
                  resetField("#password");
                  resetField("#confirmPassword");
-                 requestUpdate('https://arctic-eds-99400.herokuapp.com/profileUpdate')
+                 requestUpdate('http://localhost:3000/updateUser')
                  .then(res=>res.json())
                  .then(response=>{
                      if(response!=="Something went wrong")
@@ -144,7 +144,7 @@ const UserProfile=(props)=>{
                          setSuccessBox(false); 
                      }
                  })  
-             }
+            }
         }
         else
         {
