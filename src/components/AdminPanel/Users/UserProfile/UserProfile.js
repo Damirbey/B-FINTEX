@@ -22,9 +22,17 @@ const UserProfile=(props)=>{
             method:'get',
             headers:{'Content-Type':'application/json'}
         }).then(response=>response.json())
-        .then(receivedUser=>{setUser(receivedUser); setName(receivedUser.name)})
+        .then(receivedUser=>{setUser(receivedUser);})
+        initializeStates();
     },[])
-
+    const initializeStates=()=>{
+        console.log("Initialize");
+        setName(user.name);
+        setSurname(user.surname);
+        setEmail(user.email);
+        console.log(name);
+        console.log(surname);
+    }
     const optionalText={
          color:"green"
      }
@@ -83,7 +91,7 @@ const UserProfile=(props)=>{
                          name:name,
                          surname:surname,
                          email:email,
-                         password:password
+                         newPassword:password
                          })
              })
     }
@@ -91,52 +99,50 @@ const UserProfile=(props)=>{
     const onUpateSubmit = ()=>{
         if(name.length > 0 && surname.length > 0 && email.length > 0)
         {
-             if(password.length > 0 || confirmPassword.length > 0)
-             {
-                 if(password === confirmPassword)
-                 {
+            if(password.length > 0 || confirmPassword.length > 0)
+            {
+                if(password === confirmPassword)
+                {
                      /*Submitting the records for update with passwords*/
                      requestUpdate('http://localhost:3000/updateUser')
                      .then(res=>res.json())
                      .then(response=>{
                          if(response!=="Something went wrong")
                          {
-                             setDisplayMessage("Updated Successfully");
-                             setErrorBox(false);
-                             setSuccessBox(true); 
-                             exitEditableMode();
-                             user=response[0];
+                            setDisplayMessage("Updated Successfully");
+                            setErrorBox(false);
+                            setSuccessBox(true); 
+                            exitEditableMode();
                          }
                          else{
-                             setDisplayMessage("Oops cannot update at the moment");
-                             setErrorBox(true);
-                             setSuccessBox(false); 
+                            setDisplayMessage("Oops cannot update at the moment");
+                            setErrorBox(true);
+                            setSuccessBox(false); 
                          }
                      }) 
-                 }
-                 else
-                 {
-                     setDisplayMessage("Passwords do not match!");
-                     setErrorBox(true);
-                     setSuccessBox(false); 
-                     highlightField("#password");
-                     highlightField("#confirmPassword");
-                 }
-             }
+                }
+                else
+                {
+                    setDisplayMessage("Passwords do not match!");
+                    setErrorBox(true);
+                    setSuccessBox(false); 
+                    highlightField("#password");
+                    highlightField("#confirmPassword");
+                }
+            }
              /*Submitting the records for update without passwords*/
-             else{
+            else{
                  resetField("#password");
                  resetField("#confirmPassword");
                  requestUpdate('http://localhost:3000/updateUser')
                  .then(res=>res.json())
                  .then(response=>{
-                     if(response!=="Something went wrong")
+                     if(response!=="Ooops something went wrong!")
                      {
                          setDisplayMessage("Updated Successfully");
                          setErrorBox(false);
                          setSuccessBox(true); 
                          exitEditableMode();
-                         user=response[0];
                      }
                      else{
                          setDisplayMessage("Oops cannot update at the moment");

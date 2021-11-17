@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import './Users.css';
 import ReactPaginate from 'react-paginate';
 
-const Users=({updateUser})=>{
+const Users=()=>{
     /**React Pagination */
     const [pageNumber, setPageNumber] = useState(0);
     const usersPerPage = 10;
@@ -36,8 +36,7 @@ const Users=({updateUser})=>{
     })
     /**Redirecting to selected users page */
     const history = useHistory();
-    const onUserClick=(userId,user)=>{
-        updateUser(user);
+    const onUserClick=(userId)=>{
         history.push(`/user/${userId}`);
     }
      
@@ -66,7 +65,7 @@ const Users=({updateUser})=>{
                     {
                         filteredUsers.map((user)=>{
                             return(
-                                <tr key={user.id} onClick={()=>onUserClick(user.id,user)}>
+                                <tr key={user.id} onClick={()=>onUserClick(user.id)}>
                                     <th scope="row">{user.id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.surname}</td>

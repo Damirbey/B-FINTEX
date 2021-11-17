@@ -24,8 +24,7 @@ class App extends Component{
     super();
     this.state={
       isLoggedIn:false,
-      user:"",
-      userToUpdate:""
+      user:""
     }
   }
   changeIsLoggedInState=()=>{
@@ -40,15 +39,10 @@ class App extends Component{
     this.setState(initialState)
   }
 
-  updateUser=(user)=>{
-    this.setState({userToUpdate:user});
-  }
-
   render()
   {
     const {isLoggedIn,user} = this.state;
     return(
-      
       <React.Fragment>
         <BrowserRouter>
           <Navigation isLoggedIn={isLoggedIn} user={user} logOut={this.logOut}/>
@@ -57,10 +51,10 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
-              <Route path="/user/:id" render={(props)=><UserProfile userToUpdate={this.state.userToUpdate}/>}/>
+              <Route exact path="/user/:id" component={UserProfile}/>
               <Route exact path="/post/:id" component={PostDetail}/>
               <Switch>
-                <Route path="/adminpanel" render={() => (isLoggedIn ||user.id == 1 ? <AdminPanel  updateUser={this.updateUser}/> : <Redirect to="/b-fintex" />)} />
+                <Route path="/adminpanel" render={() => (isLoggedIn ||user.id == 1 ? <AdminPanel /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/allposts" render={() => (isLoggedIn ||user.id == 1 ? <Posts /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/addpost" render={() => (isLoggedIn ||user.id == 1 ?  <AddNewPost /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />

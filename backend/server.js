@@ -22,6 +22,9 @@ const connectionString = {
 }
 const db = pgp(connectionString);
 
+app.get("/",(req,res)=>{
+    res.json("Working well, good job");
+})
 /**Sign In request */
 app.post("/signIn", signIn.performSignIn(db,bcrypt));
 
@@ -35,7 +38,7 @@ app.get("/getAllUsers",users.getAllUsers(db));
 app.get("/getUser",users.getSingleUser(db));
 
 /**Updating user information */
-app.put("/updateUser",users.updateUser(db));
+app.put("/updateUser",users.updateUser(db,bcrypt));
 
 
 app.listen(PORT,function(){

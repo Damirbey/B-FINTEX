@@ -12,18 +12,25 @@ const getSingleUser =(db)=>(req,res)=>{
     .catch(err=>res.status(400).json("Oops something wrong"));
 }
 /**Updating user information */
-const updateUser = (db)=> (req,res)=>{
-    const {name,surname,newPassword,email} = req.body;
-    const saltRounds = 10;
-    const hashedPassword = bcrypt.hashSync(newPassword, saltRounds);
-    if(newPassword.length>0)
-    {
-        db.any("UPDATE users SET name = $1, surname = $2, email = $3, hash = $4",[name,surname,email,hashedPassword])
+const saltRounds = 10;
+const updateUser = (db,bcrypt)=> (req,res)=>{
+    const {id,name,surname,newPassword,email} = req.body;
+    
+    console.log("Name "+name);
+    console.log("Surname "+surname);
+    console.log("Email "+email);
+    console.log("Password "+newPassword);
+    
+    if(newPassword.length > 0)
+    {const hashedPassword = bcrypt.hashSync("123", saltRounds);
+        console.log("With password");
+        db.any("UPDATE users SET name = $1, surname = $2, email = $3, hash = $4 WHERE id = $5",[name,surname,email,hashedPassword,id])
         .then(response=>res.json("Success"))
         .catch(err=>res.status(400).json("Ooops something went wrong!"));
     }
     else{
-        db.any("UPDATE users SET name = $1, surname = $2, email = $3",[name,surname,email])
+        console.log("Without password");
+        db.any("UPDATE users SET name = $1, surname = $2, email = $3 WHERE id = $4",[name,surname,email,id])
         .then(response=>res.json("Success"))
         .catch(err=>res.status(400).json("Ooops something went wrong!"));
     }
