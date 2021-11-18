@@ -22,24 +22,26 @@ const connectionString = {
 }
 const db = pgp(connectionString);
 
-app.get("/",(req,res)=>{
-    res.json("Working well, good job");
-})
 /**Sign In request */
 app.post("/signIn", signIn.performSignIn(db,bcrypt));
 
 /**Register request */
 app.post("/register",register.registerNewUser(db,bcrypt));
 
+/********************************************************************************** */
+/*******-------Users Section-------------********/
+
 /**Fetching all users */
 app.get("/getAllUsers",users.getAllUsers(db));
-
-/**Fetching information of the selected user */
-app.get("/getUser",users.getSingleUser(db));
 
 /**Updating user information */
 app.put("/updateUser",users.updateUser(db,bcrypt));
 
+/**Deleting user by the admin */
+app.delete("/deleteUser",users.deleteUser(db));
+
+/********************************************************************************** */
+/*******-------Posts Section-------------********/
 
 app.listen(PORT,function(){
     console.log("Application is running on port "+ PORT);

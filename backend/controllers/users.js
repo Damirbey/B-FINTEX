@@ -5,16 +5,8 @@ const getAllUsers =(db)=>(req,res)=>{
     .catch(err=>res.status(400).json("Ooops something wrong"));
 }
 
-/**Fetching single user information */
-const getSingleUser =(db)=>(req,res)=>{
-    const userId = req.query.userId;
-    db.any("SELECT * FROM users WHERE id = $1",[userId])
-    .then(user=>res.json(user[0]))
-    .catch(err=>res.status(400).json("Oops something wrong"));
-}
-
 /**Updating user information */
-const updateUser = (db,bcrypt)=> (req,res)=>{
+const updateUser = (db,bcrypt)=>(req,res)=>{
     const {id,name,surname,newPassword,email} = req.body;
     if(newPassword.length > 0)
     {   
@@ -30,9 +22,16 @@ const updateUser = (db,bcrypt)=> (req,res)=>{
         .catch(err=>res.status(400).json("Ooops something went wrong!"));
     }
 }
+/**Deleting user from the database */
+const deleteUser = (db)=>(req,res)=>{
+    const {id} = req.body;
+    db.any("DELETE FROM users WHERE id = $1",[id])
+    .then(response=>res.json("Successfully deleted"))
+    .catch(err=>res.status(400).json("Can not delete user at the moment"));
+}
 
 module.exports={
     getAllUsers,
-    getSingleUser,
-    updateUser
+    updateUser,
+    deleteUser
 }

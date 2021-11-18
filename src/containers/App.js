@@ -17,14 +17,17 @@ import AddNewPost from '../components/AdminPanel/Posts/AddNewPost/AddNewPost';
 
 const initialState={
   isLoggedIn:false,
-  user:""
+  user:"",
+  userToUpdate:""
 }
+
 class App extends Component{
   constructor(){
     super();
     this.state={
       isLoggedIn:false,
-      user:""
+      user:"",
+      userToUpdate:""
     }
   }
   changeIsLoggedInState=()=>{
@@ -38,10 +41,14 @@ class App extends Component{
   logOut=()=>{
     this.setState(initialState)
   }
+  /**When specific user is selected from the admin page for the update */
+  updateUser=(userSelected)=>{
+    this.setState({userToUpdate:userSelected})
+  }
 
   render()
   {
-    const {isLoggedIn,user} = this.state;
+    const {isLoggedIn,user,userToUpdate} = this.state;
     return(
       <React.Fragment>
         <BrowserRouter>
@@ -51,10 +58,10 @@ class App extends Component{
               <Route exact path="/about" component={AboutScreen}/>
               <Route exact path="/posts/:id" component={PostScreen}/>
               <Route exact path="/newsletters" component={NewsLettersScreen}/> 
-              <Route exact path="/user/:id" component={UserProfile}/>
+              <Route exact path="/userInfo" render={()=><UserProfile selectedUser={userToUpdate}/>}/>
               <Route exact path="/post/:id" component={PostDetail}/>
               <Switch>
-                <Route path="/adminpanel" render={() => (isLoggedIn ||user.id == 1 ? <AdminPanel /> : <Redirect to="/b-fintex" />)} />
+                <Route path="/adminpanel" render={() => (isLoggedIn ||user.id == 1 ? <AdminPanel updateUser={this.updateUser}/> : <Redirect to="/b-fintex" />)} />
                 <Route path="/allposts" render={() => (isLoggedIn ||user.id == 1 ? <Posts /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/addpost" render={() => (isLoggedIn ||user.id == 1 ?  <AddNewPost /> : <Redirect to="/b-fintex" />)} />
                 <Route path="/signIn" render={() => (isLoggedIn ? <Redirect to="/b-fintex" /> : <SignIn changeIsLoggedInState={this.changeIsLoggedInState} changeUserState={this.changeUserState} isLoggedIn={isLoggedIn}/>)} />

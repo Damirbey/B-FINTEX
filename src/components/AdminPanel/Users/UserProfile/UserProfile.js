@@ -1,36 +1,21 @@
-import React,{useEffect, useState} from 'react';
-import { users } from '../../../../data';
+import React,{useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import './UserProfile.css';
 import AdministratorNavigation from '../../AdminNavigation/AdministratorNavigation';
-const UserProfile=(props)=>{
-    /**Fetching the selected user */
-    const id = props.match.params.id;
+const UserProfile=({selectedUser})=>{
+   
     /**States of the component */
     const [editableMode,setEditableMode] = useState(false);
-    const [name,setName] = useState('');
-    const [surname,setSurname] = useState('');
-    const [email,setEmail] = useState('');
+    const [name,setName] = useState(selectedUser.name);
+    const [surname,setSurname] = useState(selectedUser.surname);
+    const [email,setEmail] = useState(selectedUser.email);
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     const [displayMessage, setDisplayMessage] = useState('');
     const [successBox,setSuccessBox] = useState(false);
     const [errorBox, setErrorBox] = useState(false);
-    const [user,setUser]=useState('');
+    const history = useHistory();
 
-    useEffect(()=>{
-        fetch('http://localhost:3000/getUser?userId='+id+'',{
-            method:'get',
-            headers:{'Content-Type':'application/json'}
-        }).then(response=>response.json())
-        .then(receivedUser=>{setUser(receivedUser);})
-        initializeStates();
-    },[])
-
-    const initializeStates=()=>{
-        setName(user.name);
-        setSurname(user.surname);
-        setEmail(user.email);
-    }
     const optionalText={
          color:"green"
      }
@@ -85,7 +70,7 @@ const UserProfile=(props)=>{
                      method:'put',
                      headers:{'Content-Type':'application/json'},
                      body:JSON.stringify({
-                         id:user.id,
+                         id:selectedUser.id,
                          name:name,
                          surname:surname,
                          email:email,
@@ -95,7 +80,7 @@ const UserProfile=(props)=>{
     }
      /**Submit function of the component */
     const onUpateSubmit = ()=>{
-        if(name!="" && surname!="" && email!="")
+        if(name.length > 0 && surname.length > 0 && email.length > 0)
         {
             if(password.length > 0 || confirmPassword.length > 0)
             {
@@ -156,9 +141,19 @@ const UserProfile=(props)=>{
             setDisplayMessage("Please fill in all required fields");
             setErrorBox(true);
             setSuccessBox(false); 
-            highlightField("#name");
-            highlightField("#surname");
-            highlightField("#email");
+            if(name.length==0)
+            {
+                highlightField("#name");
+            }
+            if(surname.length==0)
+            {
+                highlightField("#surname");
+            }
+            if(email.length==0)
+            {
+                highlightField("#email");
+            }
+            
         }
     }
      /***Deleting the user*/
@@ -166,22 +161,22 @@ const UserProfile=(props)=>{
          var answer = window.confirm("Are you sure to delete the current user?");
          if(answer)
          {
-             fetch('https://arctic-eds-99400.herokuapp.com/deleteUser',{
+             fetch('http://localhost:3000/deleteUser',{
                  method:"delete",
                  headers:{"Content-Type":"Application/json"},
                  body:JSON.stringify({
-                     id:user.id
+                     id:selectedUser.id
                  })
              })
              .then(res=>res.json())
              .then(response=>{
                  if(response!=="Can not delete user at the moment")
                  {
-                     alert("User Deleted Successfully");
-                     //onRouteChange("home");
+                    alert("User Deleted Successfully");
+                    history.push("/adminpanel");
                  }
                  else{
-                     alert("Can not delete user at the moment");
+                    alert("Can not delete user at the moment");
                  }
              })
          }
@@ -212,25 +207,25 @@ const UserProfile=(props)=>{
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group" >
                                <label for="name">Name</label>
-                               <input type="text" className="form-control editable" id="name" defaultValue={user.name} onChange={onNameChange} readOnly/>
+                               <input type="text" className="form-control editable" id="name" defaultValue={selectedUser.name} onChange={onNameChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="surname">Surname</label>
-                               <input type="text" className="form-control editable" id="surname" placeholder="Enter your surname" defaultValue={user.surname} onChange={onSurnameChange} readOnly/>
+                               <input type="text" className="form-control editable" id="surname" placeholder="Enter your surname" defaultValue={selectedUser.surname} onChange={onSurnameChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="email">Email</label>
-                               <input type="email" className="form-control editable" id="email" placeholder="Enter email ID" defaultValue={user.email} onChange={onEmailChange} readOnly/>
+                               <input type="email" className="form-control editable" id="email" placeholder="Enter email ID" defaultValue={selectedUser.email} onChange={onEmailChange} readOnly/>
                            </div>
                        </div>
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="status">Active</label>
-                               <input type="text" className="form-control" id="status" placeholder="Current Status" defaultValue={user.active == 1 ? 'No' :'Yes'} readOnly/>
+                               <input type="text" className="form-control" id="status" placeholder="Current Status" defaultValue={selectedUser.active == 1 ? 'Yes' :'No'} readOnly/>
                            </div>
                        </div>
                        {
@@ -253,7 +248,7 @@ const UserProfile=(props)=>{
                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                            <div className="form-group">
                                <label for="dateJoined">Date Joined </label>
-                               <input type="text" className="form-control" id="dateJoined" value={user.joined} disabled/>
+                               <input type="text" className="form-control" id="dateJoined" value={selectedUser.joined} disabled/>
                            </div>
                        </div>
                    </div>
