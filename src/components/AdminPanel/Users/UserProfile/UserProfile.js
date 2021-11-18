@@ -25,13 +25,11 @@ const UserProfile=(props)=>{
         .then(receivedUser=>{setUser(receivedUser);})
         initializeStates();
     },[])
+
     const initializeStates=()=>{
-        console.log("Initialize");
         setName(user.name);
         setSurname(user.surname);
         setEmail(user.email);
-        console.log(name);
-        console.log(surname);
     }
     const optionalText={
          color:"green"
@@ -97,7 +95,7 @@ const UserProfile=(props)=>{
     }
      /**Submit function of the component */
     const onUpateSubmit = ()=>{
-        if(name.length > 0 && surname.length > 0 && email.length > 0)
+        if(name!="" && surname!="" && email!="")
         {
             if(password.length > 0 || confirmPassword.length > 0)
             {
