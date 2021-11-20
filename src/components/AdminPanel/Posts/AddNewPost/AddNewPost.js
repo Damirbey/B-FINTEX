@@ -6,7 +6,7 @@ const AddNewPost = ()=>{
     /**Declaring field variables using hooks to fetch the values entered */
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [category, setCategory] = useState('');
+    //const [category, setCategory] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
     const [successBox, setSuccessBox] = useState(false);
@@ -24,11 +24,11 @@ const AddNewPost = ()=>{
         resetField("#author");
     }
 
-    const onCategoryChange = (event)=>{
+    /* const onCategoryChange = (event)=>{
         setCategory(event.target.value);
         resetField("#category");
     }
-
+    */
     const onImageChange = (event)=>{
         setImage(event.target.value);
         resetField("#image")
@@ -62,10 +62,10 @@ const AddNewPost = ()=>{
             highlightField("#author");
             errorCount++;
         }
-        if(fieldName("#category").length==0){
+        /*if(fieldName("#category").length==0){
             highlightField("#category");
             errorCount++;
-        }
+        }*/
         if(fieldName("#image").length==0){
             highlightField("#image");
             errorCount++;
@@ -134,7 +134,7 @@ const AddNewPost = ()=>{
                                     </div>
                                 </div>
 
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                               { /*<div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="category">Post Category</label>
                                         <select type="text" className="form-control" id="category" onChange={onCategoryChange}>
@@ -144,8 +144,8 @@ const AddNewPost = ()=>{
                                             <option value="Bottom Post">Bottom Post</option>
                                         </select>
                                     </div>
-                                </div>
-
+                                </div>*/
+                                }
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="image">Image</label>
