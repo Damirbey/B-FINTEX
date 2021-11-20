@@ -43,6 +43,14 @@ app.delete("/deleteUser",users.deleteUser(db));
 /********************************************************************************** */
 /*******-------Posts Section-------------********/
 
+/**Adding new post */
+app.post("/addNewPost",(req,res)=>{
+    const {postTitle,postAuthor,postImage,postContent} = req.body;
+    db.any("INSERT INTO posts (post_title,author,post_content,image,date_added)",[postTitle,postAuthor,bytea(postImage),postContent,new Date()])
+    .then(response=>res.json("Success"))
+    .catch(err=>res.status(400).json("Error"));
+});
+
 app.listen(PORT,function(){
     console.log("Application is running on port "+ PORT);
 })
