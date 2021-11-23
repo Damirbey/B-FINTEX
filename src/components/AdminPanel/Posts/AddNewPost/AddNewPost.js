@@ -86,9 +86,30 @@ const AddNewPost = ()=>{
     const onSubmit=()=>{
         if(allFieldsHaveInput())
         {
-            setSuccessBox(true);
-            setErrorBox(false);
-            setDisplayMessage('Post added successfully');
+            fetch('http://localhost:3000/addNewPost',{
+                method:'post',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    postTitle:title,
+                    postAuthor:author,
+                    postImage:image,
+                    postContent:content
+                })
+            }).then(response=>response.json())
+            .then(receivedMessage=>{
+                if(receivedMessage!='Error')
+                {   
+                    setSuccessBox(true);
+                    setErrorBox(false);
+                    setDisplayMessage('Post added successfully');
+                }
+                else{
+                    setErrorBox(true);
+                    setSuccessBox(false);
+                    setDisplayMessage('Post added successfully');
+                }
+            })
+            
         }else{
             setErrorBox(true);
             setSuccessBox(false);
@@ -133,7 +154,6 @@ const AddNewPost = ()=>{
                                         <input type="text" className="form-control" id="author" placeholder="Author" onChange={onAuthorChange}/>
                                     </div>
                                 </div>
-
                                { /*<div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="category">Post Category</label>
