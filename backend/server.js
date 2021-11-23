@@ -46,7 +46,8 @@ app.delete("/deleteUser",users.deleteUser(db));
 /**Adding new post */
 app.post("/addNewPost",(req,res)=>{
     const {postTitle,postAuthor,postImage,postContent} = req.body;
-    db.any("INSERT INTO posts (post_title,author,post_content,image,date_added)",[postTitle,postAuthor,bytea(postImage),postContent,new Date()])
+    console.log("Image "+postImage)
+    db.any("INSERT INTO posts (post_title,author,post_content,image,date_added) VALUES ($1,$2,$3,$4,$5)",[postTitle,postAuthor,pg_read_binary_file(postImage),postContent,new Date()])
     .then(response=>res.json("Success"))
     .catch(err=>res.status(400).json("Error"));
 });
