@@ -169,7 +169,7 @@ const AddNewPost = ()=>{
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="image">Image</label>
-                                        <input type="file" className="form-control-file" id="image" onChange={onImageChange}/>
+                                        <input type="file" className="form-control-file" name="pic" id="image" onChange={onImageChange}/>
                                     </div>
                                 </div>
 
