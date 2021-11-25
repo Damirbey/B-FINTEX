@@ -8,11 +8,11 @@ const PORT = process.env.PORT || 3000;
 const signIn = require('./controllers/signIn');
 const register = require('./controllers/register');
 const users = require('./controllers/users');
-const fileUpload = require('express-fileupload');
+const multer = require('multer');
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(fileUpload());
+const upload = multer({storage:multer.memoryStorage()});
 
 /**Connecting to the database */
 const connectionString = {
@@ -46,10 +46,10 @@ app.delete("/deleteUser",users.deleteUser(db));
 /*******-------Posts Section-------------********/
 
 /**Adding new post */
-app.post("/addNewPost",(req,res)=>{
+app.post("/addNewPost",upload.single(),(req,res)=>{
     const {postTitle,postAuthor,postContent} = req.body;
  
-    console.log(req)
+    console.log(req.body)
    /* db.any("INSERT INTO posts (post_title,author,post_content,image,date_added) VALUES ($1,$2,$3,$4,$5)",[postTitle,postAuthor,lo_import('"'+postImage+'"',68583),postContent,new Date()])
     .then(response=>res.json("Success"))*/
 });
