@@ -88,7 +88,7 @@ const AddNewPost = ()=>{
         {
             fetch('http://localhost:3000/addNewPost',{
                 method:'post',
-                headers:{'Content-Type':'application/json'},
+                headers:{'Content-Type':'multipart/form-data'},
                 body:JSON.stringify({
                     postTitle:title,
                     postAuthor:author,
@@ -143,7 +143,7 @@ const AddNewPost = ()=>{
 
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group" >
-                                        <label for="postTitle">Post Title</label>
+                                        <label for="postTitle">Post Titlee</label>
                                         <input type="text" className="form-control" id="postTitle" placeholder="Title" onChange={onTitleChange}/>
                                     </div>
                                 </div>
