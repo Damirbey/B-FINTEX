@@ -12,7 +12,8 @@ const multer = require('multer');
 
 app.use(bodyParser.json());
 app.use(cors());
-const upload = multer({storage:multer.memoryStorage()});
+app.use(bodyParser.urlencoded({extended: true}));
+const upload = multer();
 
 /**Connecting to the database */
 const connectionString = {
