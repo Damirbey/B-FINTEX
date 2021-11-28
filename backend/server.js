@@ -47,11 +47,11 @@ app.delete("/deleteUser",users.deleteUser(db));
 /*******-------Posts Section-------------********/
 
 /**Adding new post */
-app.post("/addNewPost",upload.single(),(req,res)=>{
+app.post("/addNewPost",upload.single('file'),(req,res)=>{
     const {postTitle,postAuthor,postContent} = req.body;
     console.log(req.body)
-    db.any("INSERT INTO posts (post_title,author,post_content,image,date_added) VALUES ($1,$2,$3,$4,$5)",[postTitle,postAuthor,lo_import('"'+postImage+'"',68583),postContent,new Date()])
-    .then(response=>res.json("Success"))
+    /*db.any("INSERT INTO posts (post_title,author,post_content,image,date_added) VALUES ($1,$2,$3,$4,$5)",[postTitle,postAuthor,lo_import('"'+postImage+'"',68583),postContent,new Date()])
+    .then(response=>res.json("Success"))*/
 });
 
 app.listen(PORT,function(){
