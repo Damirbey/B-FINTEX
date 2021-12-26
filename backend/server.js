@@ -10,6 +10,12 @@ const register = require('./controllers/register');
 const users = require('./controllers/users');
 const multer = require('multer');
 
+/***EXTRA for IMAGE UPLOAD */
+const fileUpload = require("express-fileupload");
+/***EXTRA for IMAGE UPLOAD */
+app.use(fileUpload());
+/*** */
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -54,6 +60,14 @@ app.post("/addNewPost",upload.single('file'),(req,res)=>{
     .then(response=>res.json("Success"))*/
 });
 
+app.post("/upload", (req,res)=>{
+    const {name, data} = req.files.pic;
+    console.log("Name is ", name);
+    console.log("Data is ",data);
+    db.any("INSERT INTO posts (post_title,author,post_content,image,date_added) VALUES ($1,$2,$3,$4,$5)",[name,"DY Test","TESTING IMAGE UPLOAD",data,new Date()])
+    .then(res=>console.log("ALL GOOD!!!"))
+    .catch(err=>console.log(err))
+})
 app.listen(PORT,function(){
     console.log("Application is running on port "+ PORT);
 })
