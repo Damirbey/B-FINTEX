@@ -119,6 +119,24 @@ const AddNewPost = ()=>{
 
     return(
         <div>
+            <form action="http://localhost:3000/upload" enctype="multipart/form-data" method="POST">
+                <input type="file" name="pic"/>
+                <input type="submit" value="Upload a file"/>
+            </form>
+        </div>
+                 /*<div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div className="form-group">
+                    <label for="category">Post Category</label>
+                    <select type="text" className="form-control" id="category" onChange={onCategoryChange}>
+                        <option value="">Please select post category</option>
+                        <option value="Main Post">Main Post</option>
+                        <option value="Side Post">Side Post</option>
+                        <option value="Bottom Post">Bottom Post</option>
+                    </select>
+                </div>
+            </div>*/
+        
+       /* <div>
             <AdministratorNavigation/>
             <div className="container-full center"> 
                 <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
@@ -154,18 +172,7 @@ const AddNewPost = ()=>{
                                         <input type="text" className="form-control" id="author" placeholder="Author" onChange={onAuthorChange}/>
                                     </div>
                                 </div>
-                               { /*<div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div className="form-group">
-                                        <label for="category">Post Category</label>
-                                        <select type="text" className="form-control" id="category" onChange={onCategoryChange}>
-                                            <option value="">Please select post category</option>
-                                            <option value="Main Post">Main Post</option>
-                                            <option value="Side Post">Side Post</option>
-                                            <option value="Bottom Post">Bottom Post</option>
-                                        </select>
-                                    </div>
-                                </div>*/
-                                }
+                              --------
                                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label for="image">Image</label>
@@ -194,7 +201,7 @@ const AddNewPost = ()=>{
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*/
         
     )
 }
