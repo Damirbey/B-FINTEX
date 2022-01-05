@@ -68,6 +68,11 @@ app.post("/upload", (req,res)=>{
     .then(res=>console.log("ALL GOOD!!!"))
     .catch(err=>console.log(err))
 })
+
+app.get("/img",(req,res)=>{
+    res.end("IMAGE")
+})
+
 app.listen(PORT,function(){
     console.log("Application is running on port "+ PORT);
 })
