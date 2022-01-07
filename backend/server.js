@@ -73,7 +73,7 @@ app.get("/img/:id",(req,res)=>{
     var id = req.params.id;
     db.any("SELECT image FROM posts WHERE post_id = $1",[id])
     .then(image=>{
-        res.send(image);
+        res.send(<h1>Hello My friend</h1>);
     }).catch(err=>console.log(err));
 })
 
