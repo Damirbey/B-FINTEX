@@ -74,7 +74,6 @@ app.get("/img/:id",(req,res)=>{
     db.any("SELECT image FROM posts WHERE post_id = $1",[id])
     .then(image=>{
        res.end(image.image);
-        
     }).catch(err=>console.log(err));
 })
 
