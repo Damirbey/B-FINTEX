@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const signIn = require('./controllers/signIn');
 const register = require('./controllers/register');
 const users = require('./controllers/users');
-const multer = require('multer');
+//const multer = require('multer');
 
 /***EXTRA for IMAGE UPLOAD */
 const fileUpload = require("express-fileupload");
